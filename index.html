@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Krista Fédra - Weboldal</title>
+    <style>
+        /* ALAPÉRTELMEZETT TÉMA ÉS ÚJ SZÍNEK */
+        :root {
+            --bg-color: #f4f6f9;
+            --container-bg: #ffffff;
+            --text-color: #2c3e50;
+            --primary-btn: #3498db;
+            --primary-hover: #2980b9;
+            --font-family: 'Georgia', serif; 
+            --accent-gold: #d4af37;
+            --accent-red: #a52a2a;
+            --accent-pink: #ff66b2;
+            --accent-black: #1a1a1a;
+        }
+
+        /* TÉMÁK SZÍNEI */
+        body.theme-randi {
+            --bg-color: #ffe6f2; --container-bg: #fff0f5;
+            --text-color: #800040; --primary-btn: #ff66b2; --primary-hover: #e60073;
+        }
+        body.theme-kondi {
+            --bg-color: #1a1a1a; --container-bg: #333333;
+            --text-color: #f2f2f2; --primary-btn: #ff4500; --primary-hover: #cc3700;
+        }
+        body.theme-kajalas {
+            --bg-color: #fff3e6; --container-bg: #ffebcc;
+            --text-color: #8b4513; --primary-btn: #ff8c00; --primary-hover: #e67e00;
+        }
+        body.theme-egyeb {
+            --bg-color: #f0e6ff; --container-bg: #ffffff;
+            --text-color: #330066; --primary-btn: #9933ff; --primary-hover: #7300e6;
+        }
+
+        /* ALAP STÍLUSOK */
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            transition: all 0.5s ease;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: var(--container-bg);
+            padding: 25px 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        h1 { font-size: 1.8rem; margin-top: 0; color: var(--accent-black); }
+        h2 { font-size: 1.6rem; margin-top: 0; margin-bottom: 20px; color: var(--accent-black); }
+        h3 { font-size: 1.4rem; margin-top: 15px; color: var(--accent-black); }
+
+        .btn-back {
+            background: none;
+            border: none;
+            color: var(--primary-btn);
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0;
+            margin-bottom: 20px;
+            text-align: left;
+            display: inline-block;
+            width: 100%;
+            font-family: var(--font-family);
+        }
+        .btn-back:hover { text-decoration: underline; }
+
+        .btn {
+            background-color: var(--primary-btn);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background 0.3s;
+            font-weight: bold;
+            box-sizing: border-box;
+            font-family: var(--font-family);
+        }
+
+        .btn:hover { background-color: var(--primary-hover); }
+        .btn:disabled { background-color: #ccc; cursor: not-allowed; }
+        .btn-secondary { background-color: #7f8c8d; margin-top: 20px; }
+        .btn-secondary:hover { background-color: #95a5a6; }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input[type="text"], input[type="password"], input[type="number"], input[type="date"], select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-family: inherit;
+            font-size: 15px;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .hidden { display: none !important; }
+
+        .booking-card {
+            background: rgba(255, 255, 255, 0.85);
+            border-left: 5px solid var(--primary-btn);
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            color: #000;
+            text-align: left;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        /* CSÚSZKA STÍLUSOK */
+        .slider-container {
+            background: rgba(0,0,0,0.03);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-top: 10px;
+        }
+        .slider-group { margin-bottom: 15px; }
+        .slider-group span { font-weight: bold; color: var(--primary-btn); font-size: 16px; }
+        input[type=range] { width: 100%; margin: 10px 0; }
+        #status-message { font-weight: bold; padding: 10px; border-radius: 5px; text-align: center; margin-top: 10px; }
+        .status-free { background-color: #e8f8f5; color: #2ecc71; border: 1px solid #2ecc71; }
+        .status-booked { background-color: #fdedec; color: #e74c3c; border: 1px solid #e74c3c; }
+        .booked-slots-list {
+            font-size: 13px; color: var(--text-color); margin-top: 10px;
+            background: rgba(255,255,255,0.5); padding: 10px; border-radius: 5px; border-left: 3px solid #e74c3c;
+        }
+
+        /* POP-UP STÍLUSOK */
+        #intro-popup {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .popup-content {
+            background-color: #fff;
+            color: #333;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            text-align: justify;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+        }
+        .signature {
+            font-family: 'Brush Script MT', 'Dancing Script', 'Comic Sans MS', cursive;
+            font-size: 2.2rem;
+            color: #ff66b2;
+            text-align: right;
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
+        .error-text {
+            color: #e74c3c;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* ÚJ FŐMENÜ STÍLUSOK */
+        #page-main-menu .btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 25px;
+            font-size: 1.1rem;
+            background-color: var(--container-bg);
+            color: var(--accent-black);
+            border: 2px solid var(--accent-black);
+            box-shadow: none;
+            transition: all 0.3s ease;
+        }
+        #page-main-menu .btn:hover {
+            background-color: var(--accent-black);
+            color: white;
+            border-color: var(--accent-black);
+        }
+        #page-main-menu .btn span {
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+        #page-main-menu .btn:nth-child(1) span { color: var(--accent-pink); }
+        #page-main-menu .btn:nth-child(2) span { color: var(--accent-gold); }
+        #page-main-menu .btn:nth-child(3) span { color: var(--accent-red); }
+
+        /* BELÉPÉSI OLDAL STÍLUSOK (KÉPEKHEZ) */
+        #page-login .container {
+            border: 5px solid var(--accent-black);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        #page-login h1 { color: var(--accent-red); font-size: 2rem; }
+
+        /* SZEMÉLYI EDZÉS STÍLUSOK */
+        #page-training .container {
+            max-width: 700px;
+            background-color: #1a1a1a;
+            color: #f2f2f2;
+            border: 3px solid var(--accent-gold);
+            padding: 30px;
+        }
+        #page-training h2 { color: var(--accent-gold); border-bottom: 2px solid var(--accent-gold); display: inline-block; padding-bottom: 5px; }
+        #page-training .training-poster {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.5);
+            margin-bottom: 25px;
+        }
+        #page-training .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            text-align: left;
+        }
+        #page-training .detail-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-gold);
+        }
+        #page-training .detail-item h3 { color: var(--accent-gold); margin-top: 0; }
+        #page-training .training-footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+        }
+        #page-training .training-call {
+            font-size: 1.2rem;
+            color: var(--accent-pink);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        /* KÉPEK STÍLUSOK JAVÍTVA */
+        #page-gallery .container {
+            max-width: 800px;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            padding: 20px 0;
+        }
+        .gallery-item {
+            width: 100%;
+            height: 150px;
+            border-radius: 10px;
+            object-fit: cover; /* Ez vágja le a képeket torzulás nélkül */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: 3px solid transparent;
+            background-color: #eee;
+            transition: all 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-pink);
+        }
+
+    </style>
+</head>
+<body class="theme-sima" id="body">
+
+    <div id="intro-popup">
+        <div class="popup-content">
+            <p><strong>Sziasztok!</strong></p>
+            <p>Fédra vagyok, egy nagyon elfoglalt 17 éves lány. Nagyon sokat kondizom, nagyon sokat járok a barátnőimmel és ezért nagyon sűrűek a mindennapi programjaim.</p>
+            <p>Legtöbbször anyának el kell engednie engem, és hogy ő is lássa, mikor van hozzám időpont foglalva, és elenged-e vagy sem... ezért szeretném, hogy itt foglaljatok hozzám időpontot!</p>
+            <div class="signature">Fédra ✨</div>
+            <button class="btn" style="background-color: #ff66b2;" onclick="closeIntro()">Tovább az oldalra ✨</button>
+        </div>
+    </div>
+
+    <div id="page-main-menu" class="container hidden">
+        <h1>Válassz egy opciót!</h1>
+        <p>Üdvözöllek az oldalamon, mit szeretnél csinálni?</p>
+        
+        <button class="btn" onclick="handleMenuClick('booking')">
+            <span>📅</span> Időpontfoglalás
+        </button>
+        <button class="btn" onclick="handleMenuClick('training')">
+            <span>🏋️‍♀️</span> Személyi Edzés
+        </button>
+        <button class="btn" onclick="handleMenuClick('gallery')">
+            <span>📸</span> Képek
+        </button>
+    </div>
+
+    <div id="page-login" class="container hidden">
+        <button class="btn-back" onclick="showMainMenu()">⬅ Vissza a Főmenübe</button>
+        <h1>Privát Galéria 📸</h1>
+        <p>A képek megtekintéséhez kérlek add meg a jelszót.</p>
+        <div class="form-group">
+            <label for="loginCode">Jelszó:</label>
+            <input type="password" id="loginCode" placeholder="Írd be a jelszót...">
+        </div>
+        <button class="btn" style="background-color: var(--accent-red);" onclick="validateLogin()">Belépés</button>
+        <div id="loginError" class="error-text hidden">❌ Helytelen jelszó!</div>
+    </div>
+
+    <div id="page-booking-section" class="container hidden">
+        <button class="btn-back" onclick="showMainMenu()">⬅ Vissza a Főmenübe</button>
+        
+        <div id="page-selection" class="container">
+            <h2>Foglalj időpontot Fédrához!</h2>
+            <p>Milyen találkozót szeretnél?</p>
+            
+            <button class="btn" onclick="selectType('sima', 'Sima találkozó')">Sima találkozó 🤝</button>
+            <button class="btn" style="background-color: #ff66b2;" onclick="selectType('randi', 'Randi')">Randi 💖</button>
+            <button class="btn" style="background-color: #ff4500;" onclick="selectType('kondi', 'Kondi')">Kondi 🏋️‍♂️</button>
+            <button class="btn" style="background-color: #ff8c00;" onclick="selectType('kajalas', 'Kajálás')">Kajálás 🍔</button>
+            <button class="btn" style="background-color: #9933ff;" onclick="selectType('egyeb', 'Egyéb')">Egyéb ✨</button>
+
+            <hr style="margin: 25px 0; border: 0; border-top: 1px solid #ddd;">
+            <button class="btn btn-secondary" onclick="showSubPage('page-search')">Már foglaltam / Keresés 🔍</button>
+        </div>
+
+        <div id="page-booking" class="container hidden">
+            <button class="btn-back" onclick="resetApp()">⬅ Vissza a típusokhoz</button>
+            <h2 id="booking-title">Időpontfoglalás</h2>
+            
+            <div class="form-group">
+                <label for="bookerName">A te neved:</label>
+                <input type="text" id="bookerName" placeholder="Írd be a neved..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="bookerAge">Hány éves vagy?</label>
+                <input type="number" id="bookerAge" placeholder="pl. 18" required>
+            </div>
+
+            <div id="dynamic-fields"></div>
+
+            <div class="form-group">
+                <label for="bookingDate">Válassz egy napot:</label>
+                <input type="date" id="bookingDate" onchange="handleDateChange()" required>
+            </div>
+            
+            <div id="time-selector" class="slider-container hidden">
+                <div id="booked-slots-display" class="booked-slots-list hidden"></div>
+
+                <div class="slider-group">
+                    <label>Kezdés ideje: <span id="startDisplay">08:00</span></label>
+                    <input type="range" id="startSlider" min="0" max="1425" step="15" value="480" oninput="updateSliders('start')">
+                </div>
+
+                <div class="slider-group">
+                    <label>Befejezés ideje: <span id="endDisplay">09:00</span></label>
+                    <input type="range" id="endSlider" min="15" max="1440" step="15" value="540" oninput="updateSliders('end')">
+                </div>
+
+                <div id="status-message" class="status-free">Szabad időpont! ✅</div>
+            </div>
+
+            <button class="btn" id="submitBtn" style="margin-top: 20px;" onclick="saveBooking()" disabled>Foglalás véglegesítése</button>
+        </div>
+
+        <div id="page-search" class="container hidden">
+            <button class="btn-back" onclick="resetApp()">⬅ Vissza a típusokhoz</button>
+            <h2>Foglalások keresése</h2>
+
+            <div class="form-group">
+                <label for="secretCode">Fédra kódja:</label>
+                <input type="password" id="secretCode" placeholder="Add meg a belépési kódot..." oninput="searchBookings()">
+            </div>
+            
+            <div class="form-group">
+                <label for="searchName">Keresés név alapján:</label>
+                <input type="text" id="searchName" placeholder="Írd be a nevet..." oninput="searchBookings()">
+            </div>
+            
+            <div id="results"></div>
+        </div>
+    </div>
+
+    <div id="page-training" class="container hidden">
+        <button class="btn-back" style="color: var(--accent-gold);" onclick="showMainMenu()">⬅ Vissza a Főmenübe</button>
+        <h2>Személyi Edzés Fédrával</h2>
+        
+        <img src="20.jpg" alt="Krista Fédra Személyi Edző & Életmódtanácsadó Plakát" class="training-poster">
+
+        <div class="details-grid">
+            <div class="detail-item">
+                <h3>🏋️‍♀️ Személyi edzés</h3>
+                <p>Célzott, hatékony, személyre szabott edzéstervek, amelyek segítenek elérni a kívánt testformát és erőnlétet.</p>
+            </div>
+            <div class="detail-item">
+                <h3>🥗 Életmód & Táplálkozás</h3>
+                <p>Gyakorlati tanácsadás az egészséges és fenntartható életért. Segítek kialakítani egy olyan életmódot, amely illeszkedik a céljaidhoz.</p>
+            </div>
+            <div class="detail-item">
+                <h3>🤝 Egészségmentor program</h3>
+                <p>Komplex támogatás, testben és lélekben egyaránt. Nem csak edzünk, de motiválom és támogatom az egész utat.</p>
+            </div>
+            <div class="detail-item">
+                <h3>🏆 Eredmények</h3>
+                <p>Mérhető fejlődés, folyamatos motiváció, valódi változás. Az edzések eredményeit rendszeresen nyomon követjük.</p>
+            </div>
+            <div class="detail-item">
+                <h3>👥 Páros és kiscsoportos edzések</h3>
+                <p>Motivált közös edzések barátokkal, párokkal. Ha szereted a társaságot, ez a tökéletes választás.</p>
+            </div>
+        </div>
+
+        <div class="training-footer">
+            <p class="training-call">Kezdd el ma a változást! ✨</p>
+            <p>Kérj ajánlatot vagy jelentkezz be egy ingyenes próbaedzésre és állapotfelmérésre az elérhetőségeimen:</p>
+            <p>📞 +36 30 123 4567 | 🌐 facebook.com/krista.fedra | 💻 www.kristafedra.hu</p>
+        </div>
+    </div>
+
+    <div id="page-gallery" class="container hidden">
+        <button class="btn-back" onclick="showMainMenu()">⬅ Vissza a Főmenübe</button>
+        <h2>Képek Fédráról</h2>
+        <p>Itt láthattok majd képeket rólam, a kondizásról és a barátnőimmel töltött időről!</p>
+
+        <div class="gallery-grid">
+            <img src="1.jpg" alt="Fédra 1" class="gallery-item">
+            <img src="2.jpg" alt="Fédra 2" class="gallery-item">
+            <img src="3.jpg" alt="Fédra 3" class="gallery-item">
+            <img src="4.jpg" alt="Fédra 4" class="gallery-item">
+            <img src="5.jpg" alt="Fédra 5" class="gallery-item">
+            <img src="6.jpg" alt="Fédra 6" class="gallery-item">
+            <img src="7.jpg" alt="Fédra 7" class="gallery-item">
+            <img src="8.jpg" alt="Fédra 8" class="gallery-item">
+            <img src="9.jpg" alt="Fédra 9" class="gallery-item">
+            <img src="10.jpg" alt="Fédra 10" class="gallery-item">
+            <img src="11.jpg" alt="Fédra 11" class="gallery-item">
+            <img src="12.jpg" alt="Fédra 12" class="gallery-item">
+            <img src="13.jpg" alt="Fédra 13" class="gallery-item">
+            <img src="14.jpg" alt="Fédra 14" class="gallery-item">
+            <img src="15.jpg" alt="Fédra 15" class="gallery-item">
+            <img src="16.jpg" alt="Fédra 16" class="gallery-item">
+            <img src="17.jpg" alt="Fédra 17" class="gallery-item">
+            <img src="18.jpg" alt="Fédra 18" class="gallery-item">
+            <img src="19.jpg" alt="Fédra 19" class="gallery-item">
+            <img src="20.jpg" alt="Fédra 20" class="gallery-item">
+        </div>
+    </div>
+
+    <script>
+        let currentType = '';
+        let currentTypeLabel = '';
+        let selectedDate = '';
+        let isIntervalValid = false;
+
+        // V4-es adatbázis (megmaradnak a korábban mentett adataid)
+        let bookings = JSON.parse(localStorage.getItem('fedra_bookings_v4')) || [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const today = new Date().toISOString().split("T")[0];
+            const dateInput = document.getElementById('bookingDate');
+            if (dateInput) dateInput.min = today;
+        });
+
+        // --- FŐMENÜ ÉS SZEKCIÓ KEZELÉS ---
+        function hideAllSections() {
+            document.getElementById('page-main-menu').classList.add('hidden');
+            document.getElementById('page-booking-section').classList.add('hidden');
+            document.getElementById('page-training').classList.add('hidden');
+            document.getElementById('page-gallery').classList.add('hidden');
+            document.getElementById('page-login').classList.add('hidden');
+            document.getElementById('intro-popup').classList.add('hidden');
+        }
+
+        // Amikor a pop-upból kilépünk, a főmenübe kerülünk
+        function closeIntro() {
+            hideAllSections();
+            document.getElementById('page-main-menu').classList.remove('hidden');
+            document.getElementById('body').className = 'theme-sima';
+        }
+
+        function showMainMenu() {
+            hideAllSections();
+            document.getElementById('page-main-menu').classList.remove('hidden');
+            document.getElementById('body').className = 'theme-sima';
+            document.getElementById('loginCode').value = ''; // jelszó mező ürítése
+            document.getElementById('loginError').classList.add('hidden');
+        }
+
+        function handleMenuClick(action) {
+            if (action === 'booking') {
+                hideAllSections();
+                document.getElementById('page-booking-section').classList.remove('hidden');
+                showSubPage('page-selection');
+            } else if (action === 'training') {
+                hideAllSections();
+                document.getElementById('page-training').classList.remove('hidden');
+            } else if (action === 'gallery') {
+                hideAllSections();
+                document.getElementById('page-login').classList.remove('hidden');
+            }
+        }
+
+        function validateLogin() {
+            const code = document.getElementById('loginCode').value;
+            const errorEl = document.getElementById('loginError');
+            if (code === '20092003') {
+                errorEl.classList.add('hidden');
+                hideAllSections();
+                document.getElementById('page-gallery').classList.remove('hidden');
+            } else {
+                errorEl.classList.remove('hidden');
+            }
+        }
+
+        // A foglaláson belüli aloldalak kezelése
+        function showSubPage(pageId) {
+            document.getElementById('page-selection').classList.add('hidden');
+            document.getElementById('page-booking').classList.add('hidden');
+            document.getElementById('page-search').classList.add('hidden');
+            document.getElementById(pageId).classList.remove('hidden');
+        }
+
+        // --- FOGLALÁSI LOGIKA ---
+        function selectType(type, label) {
+            currentType = type;
+            currentTypeLabel = label;
+            document.getElementById('body').className = 'theme-' + type;
+            document.getElementById('booking-title').innerText = label + ' foglalása';
+            
+            const dynamicContainer = document.getElementById('dynamic-fields');
+            if (type === 'kajalas') {
+                dynamicContainer.innerHTML = `
+                    <div class="form-group">
+                        <label for="foodSelect">Hol szeretnénk enni?</label>
+                        <select id="foodSelect" onchange="toggleCustomFood()">
+                            <option value="McDonald's">McDonald's</option>
+                            <option value="Burger King">Burger King</option>
+                            <option value="KFC">KFC</option>
+                            <option value="Pizza Hut">Pizza Hut</option>
+                            <option value="Bellozzo">Bellozzo</option>
+                            <option value="custom">Egyéb (saját választás...)</option>
+                        </select>
+                        <input type="text" id="customDetailInput" class="hidden" placeholder="Írd be, hol ennél..." style="margin-top: 10px;">
+                    </div>`;
+            } else if (type === 'kondi') {
+                dynamicContainer.innerHTML = `
+                    <div class="form-group">
+                        <label for="detailInput">Milyen edzést csinálnál?</label>
+                        <select id="detailInput">
+                            <option value="Kardió">Kardió</option>
+                            <option value="Láb">Láb</option>
+                            <option value="Hát">Hát</option>
+                            <option value="Mell">Mell</option>
+                            <option value="Bicepsz">Bicepsz</option>
+                            <option value="Tricepsz">Tricepsz</option>
+                        </select>
+                    </div>`;
+            } else if (type === 'randi') {
+                dynamicContainer.innerHTML = `<div class="form-group"><label for="detailInput">Randi helyszíne:</label><input type="text" id="detailInput" placeholder="Írd be a helyszínt..." required></div>`;
+            } else {
+                dynamicContainer.innerHTML = `<div class="form-group"><label for="detailInput">Miről szeretnél témázni?</label><input type="text" id="detailInput" placeholder="Pl.: Élet értelme..." required></div>`;
+            }
+            showSubPage('page-booking');
+        }
+
+        function toggleCustomFood() {
+            const select = document.getElementById('foodSelect');
+            const customInput = document.getElementById('customDetailInput');
+            if (select.value === 'custom') {
+                customInput.classList.remove('hidden');
+            } else {
+                customInput.classList.add('hidden');
+                customInput.value = '';
+            }
+        }
+
+        function formatTime(minutes) {
+            let h = Math.floor(minutes / 60);
+            let m = minutes % 60;
+            return (h < 10 ? '0' + h : h) + ':' + (m < 10 ? '0' + m : m);
+        }
+
+        function handleDateChange() {
+            selectedDate = document.getElementById('bookingDate').value;
+            if(selectedDate) {
+                document.getElementById('time-selector').classList.remove('hidden');
+                document.getElementById('submitBtn').disabled = false;
+                showBookedSlotsForDate();
+                updateSliders('start');
+            }
+        }
+
+        function showBookedSlotsForDate() {
+            const display = document.getElementById('booked-slots-display');
+            const todaysBookings = bookings.filter(b => b.date === selectedDate);
+            
+            if(todaysBookings.length === 0) {
+                display.classList.add('hidden');
+            } else {
+                display.classList.remove('hidden');
+                let text = '<strong>Ezen a napon már foglalt:</strong><br>';
+                todaysBookings.sort((a,b) => a.startMins - b.startMins);
+                todaysBookings.forEach(b => {
+                    text += `- ${formatTime(b.startMins)} és ${formatTime(b.endMins)} között<br>`;
+                });
+                display.innerHTML = text;
+            }
+        }
+
+        function updateSliders(changed) {
+            let startVal = parseInt(document.getElementById('startSlider').value);
+            let endVal = parseInt(document.getElementById('endSlider').value);
+
+            if (startVal >= endVal) {
+                if (changed === 'start') {
+                    endVal = startVal + 15;
+                    document.getElementById('endSlider').value = endVal;
+                } else {
+                    startVal = endVal - 15;
+                    document.getElementById('startSlider').value = startVal;
+                }
+            }
+
+            document.getElementById('startDisplay').innerText = formatTime(startVal);
+            document.getElementById('endDisplay').innerText = formatTime(endVal);
+            checkAvailability(startVal, endVal);
+        }
+
+        function checkAvailability(startMins, endMins) {
+            const todaysBookings = bookings.filter(b => b.date === selectedDate);
+            const hasConflict = todaysBookings.some(b => {
+                return (startMins < b.endMins && endMins > b.startMins);
+            });
+
+            const statusEl = document.getElementById('status-message');
+            const submitBtn = document.getElementById('submitBtn');
+
+            if (hasConflict) {
+                statusEl.className = 'status-booked';
+                statusEl.innerText = '❌ Ez az idősáv már foglalt (részben vagy egészben)!';
+                submitBtn.disabled = true;
+                isIntervalValid = false;
+            } else {
+                statusEl.className = 'status-free';
+                statusEl.innerText = '✅ Szabad időpont!';
+                submitBtn.disabled = false;
+                isIntervalValid = true;
+            }
+        }
+
+        function saveBooking() {
+            if (!isIntervalValid) return;
+
+            const name = document.getElementById('bookerName').value;
+            const age = document.getElementById('bookerAge').value;
+            
+            let detail = '';
+            if (currentType === 'kajalas') {
+                const selectVal = document.getElementById('foodSelect').value;
+                detail = selectVal === 'custom' ? document.getElementById('customDetailInput').value : selectVal;
+            } else {
+                detail = document.getElementById('detailInput').value;
+            }
+
+            if(!name || !age || !detail || !selectedDate) {
+                alert("Kérlek tölts ki minden mezőt!");
+                return;
+            }
+
+            let startMins = parseInt(document.getElementById('startSlider').value);
+            let endMins = parseInt(document.getElementById('endSlider').value);
+
+            let detailLabel = 'Téma:';
+            if (currentType === 'kajalas') detailLabel = 'Helyszín:';
+            if (currentType === 'kondi') detailLabel = 'Edzés:';
+            if (currentType === 'randi') detailLabel = 'Helyszín:';
+
+            const newBooking = {
+                name: name,
+                age: age,
+                type: currentTypeLabel,
+                detailLabel: detailLabel,
+                detail: detail,
+                date: selectedDate,
+                startMins: startMins,
+                endMins: endMins
+            };
+
+            bookings.push(newBooking);
+            localStorage.setItem('fedra_bookings_v4', JSON.stringify(bookings));
+            
+            alert("Sikeres foglalás!");
+            resetApp();
+        }
+
+        // Keresés a foglalások között
+        function searchBookings() {
+            const secretCode = document.getElementById('secretCode').value;
+            const searchTerm = document.getElementById('searchName').value.toLowerCase();
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+
+            // Foglalások rejtve maradnak a régi kóddal
+            if (secretCode !== '20092003') {
+                if (secretCode.length > 0) {
+                    resultsDiv.innerHTML = '<p class="error-text">❌ Helytelen kód! A foglalások rejtve vannak.</p>';
+                }
+                return;
+            }
+
+            let filtered = bookings;
+            if (searchTerm.trim() !== '') {
+                filtered = bookings.filter(b => b.name.toLowerCase().includes(searchTerm));
+            }
+
+            if(filtered.length === 0) {
+                resultsDiv.innerHTML = '<p>Nincs megjeleníthető foglalás.</p>';
+                return;
+            }
+
+            filtered.forEach(b => {
+                resultsDiv.innerHTML += `
+                    <div class="booking-card">
+                        <strong>Név:</strong> ${b.name} (Életkor: ${b.age})<br>
+                        <strong>Típus:</strong> ${b.type} <br>
+                        <strong>${b.detailLabel}</strong> ${b.detail} <br>
+                        <strong>Dátum:</strong> ${b.date} <br>
+                        <strong>Időpont:</strong> ${formatTime(b.startMins)} - ${formatTime(b.endMins)}
+                    </div>
+                `;
+            });
+        }
+
+        function resetApp() {
+            document.getElementById('body').className = 'theme-sima';
+            
+            if(document.getElementById('bookerName')) document.getElementById('bookerName').value = '';
+            if(document.getElementById('bookerAge')) document.getElementById('bookerAge').value = '';
+            if(document.getElementById('bookingDate')) document.getElementById('bookingDate').value = '';
+            if(document.getElementById('secretCode')) document.getElementById('secretCode').value = '';
+            if(document.getElementById('searchName')) document.getElementById('searchName').value = '';
+            if(document.getElementById('results')) document.getElementById('results').innerHTML = '';
+            
+            if(document.getElementById('time-selector')) document.getElementById('time-selector').classList.add('hidden');
+            if(document.getElementById('submitBtn')) document.getElementById('submitBtn').disabled = true;
+            selectedDate = '';
+            isIntervalValid = false;
+            
+            showSubPage('page-selection');
+        }
+    </script>
+</body>
+</html>
