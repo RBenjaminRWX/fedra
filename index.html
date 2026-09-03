@@ -285,7 +285,7 @@
             width: 100%;
             height: 150px;
             border-radius: 10px;
-            object-fit: cover; /* Ez vágja le a képeket torzulás nélkül */
+            object-fit: cover;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             border: 3px solid transparent;
             background-color: #eee;
@@ -296,6 +296,43 @@
             border-color: var(--accent-pink);
         }
 
+        /* VERS OLDAL STÍLUSOK */
+        #page-poem .container {
+            border: 3px solid var(--accent-gold);
+            background: linear-gradient(135deg, #fff0f5, #ffffff);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2);
+            padding: 40px 30px;
+        }
+        #page-poem h2 {
+            font-family: 'Brush Script MT', 'Dancing Script', 'Comic Sans MS', cursive;
+            font-size: 3rem;
+            color: var(--accent-pink);
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        #page-poem .poem-date {
+            font-weight: bold;
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        #page-poem .poem-text {
+            font-size: 1.25rem;
+            line-height: 2.2;
+            color: var(--text-color);
+            margin-bottom: 30px;
+            white-space: pre-wrap; 
+            font-family: 'Georgia', serif;
+        }
+        .poem-divider {
+            border: 0;
+            border-top: 1px solid var(--accent-gold);
+            margin: 40px 0;
+            opacity: 0.4;
+        }
+
     </style>
 </head>
 <body class="theme-sima" id="body">
@@ -304,9 +341,10 @@
         <div class="popup-content">
             <p><strong>Sziasztok!</strong></p>
             <p>Fédra vagyok, egy nagyon elfoglalt 17 éves lány. Nagyon sokat kondizom, nagyon sokat járok a barátnőimmel és ezért nagyon sűrűek a mindennapi programjaim.</p>
-            <p>Legtöbbször anyának el kell engednie engem, de ezt néha kiszoktam játszani a lokátorral haha. Foglaljatok hozzám időpontot, gyertek velem edzeni és ha tudod a jelszót tekintsd meg az exklúzív képeimet!</p>
+            <p>Legtöbbször anyának el kell engednie engem, és hogy ő is lássa, mikor van hozzám időpont foglalva, és elenged-e vagy sem... ezért szeretném, hogy itt foglaljatok hozzám időpontot!</p>
             <div class="signature">Fédra ✨</div>
             <button class="btn" style="background-color: #ff66b2;" onclick="closeIntro()">Tovább az oldalra ✨</button>
+            <button class="btn" style="background-color: var(--accent-gold); border: 1px solid #b8860b; margin-top: 10px;" onclick="showPoemPage()">📜 VERSEK FÉDRÁNAK</button>
         </div>
     </div>
 
@@ -335,6 +373,65 @@
         </div>
         <button class="btn" style="background-color: var(--accent-red);" onclick="validateLogin()">Belépés</button>
         <div id="loginError" class="error-text hidden">❌ Helytelen jelszó!</div>
+    </div>
+
+    <!-- ÚJ VERSEK SZEKCIÓ (TÖBB DÁTUMMAL) -->
+    <div id="page-poem" class="container hidden">
+        <button class="btn-back" onclick="showMainMenu()">⬅ Vissza a Főmenübe</button>
+        <h2>Versek Fédrának</h2>
+        
+        <!-- AUGUSZTUS 15. VERS -->
+        <div class="poem-date">Augusztus 15.</div>
+        <h2>TÓPART</h2>
+        <div class="poem-text">
+            A tóparton ketten
+            Némán, szép csendben
+            Természet lágy ölén
+            Kéz a kézben ülvén
+
+            Madarak énekelnek
+            Vígan csiripelnek
+            Víznek hullámzása
+            Szívem dobbanása
+
+            Fényes szikra lobban
+            Szívem nagyot dobban
+            Szemed látványában
+            Angyal formájában
+
+            Titkos, mély érzés
+            Lelassul a légzés
+            Ajkaid a számon
+            Mint egy festett vászon
+
+            Elhalkul minden más
+            Oly lágy a suttogás
+            Itt vagyunk TE és ÉN
+            A tópart peremén
+
+        </div>
+
+        <hr class="poem-divider">
+
+        <!-- SZEPTEMBER 1. VERS -->
+        <div class="poem-date">Szeptember 1.</div>
+        <h2>TE</h2>
+        <div class="poem-text">
+            Nem vagyok én jó ember, tudom jól de veled minden megváltozott.
+            Mikor gyönyörű kék szemedbe néztem, szomorúságom eltávozott.
+            Nem gondoltam volna, hogy engem újra egy lány ennyire elkápráztat.
+            De mikor közelségedet érzem, elfelejtem minden problémámat.
+            Veled minden is lelassul, de mégsem érzem az idő elmúlását.
+            Csak téged hallak és a saját szívverésem lüktető pulzálását.
+            Mikor a szám a szádhoz ért szívem majd kiugrott a helyéről.
+            Nem tudtam tekintetemet levenni utána a két szép szemedről.
+            Valamit érzek, valami kimondatlan de mégis csodás érzést.
+            Hiszen TE állítottad el a tátongó sebeimből folyó vérzést.
+            Szerelmes lettem a tekintetedbe, a mosolyodba, illatodba.
+            Miattad érzem magamat újra, fent, magasan a csillagokban.
+        </div>
+
+        <div class="signature">Szeretettel Bendzsámin ✨</div>
     </div>
 
     <div id="page-booking-section" class="container hidden">
@@ -474,12 +571,6 @@
             <img src="18.jpg" alt="Fédra 18" class="gallery-item">
             <img src="19.jpg" alt="Fédra 19" class="gallery-item">
             <img src="20.jpg" alt="Fédra 20" class="gallery-item">
-            <img src="21.jpg" alt="Fédra 21" class="gallery-item">
-            <img src="22.jpg" alt="Fédra 22" class="gallery-item">
-            <img src="23.jpg" alt="Fédra 23" class="gallery-item">
-            <img src="24.jpg" alt="Fédra 24" class="gallery-item">
-            <img src="25.jpg" alt="Fédra 25" class="gallery-item">
-            <img src="26.jpg" alt="Fédra 26" class="gallery-item">
         </div>
     </div>
 
@@ -505,6 +596,7 @@
             document.getElementById('page-training').classList.add('hidden');
             document.getElementById('page-gallery').classList.add('hidden');
             document.getElementById('page-login').classList.add('hidden');
+            document.getElementById('page-poem').classList.add('hidden'); 
             document.getElementById('intro-popup').classList.add('hidden');
         }
 
@@ -513,6 +605,13 @@
             hideAllSections();
             document.getElementById('page-main-menu').classList.remove('hidden');
             document.getElementById('body').className = 'theme-sima';
+        }
+
+        // KÜLÖN FUNKCIÓ A VERS OLDAL MEGJELENÍTÉSÉHEZ
+        function showPoemPage() {
+            hideAllSections();
+            document.getElementById('page-poem').classList.remove('hidden');
+            document.getElementById('body').className = 'theme-randi'; // Adunk neki egy romantikus, rózsaszínes hátteret
         }
 
         function showMainMenu() {
