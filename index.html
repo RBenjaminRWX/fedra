@@ -219,11 +219,10 @@
             font-size: 1.5rem;
             margin-right: 15px;
         }
-        /* Módosítottam nth-of-type-ra, hogy pontosan a gombokat színezze */
         #page-main-menu .btn:nth-of-type(1) span { color: var(--accent-pink); }
         #page-main-menu .btn:nth-of-type(2) span { color: var(--accent-gold); }
         #page-main-menu .btn:nth-of-type(3) span { color: var(--accent-red); }
-        #page-main-menu .btn:nth-of-type(4) span { color: #9933ff; } /* A versek ikon színe (lila) */
+        #page-main-menu .btn:nth-of-type(4) span { color: #9933ff; }
 
         /* BELÉPÉSI OLDAL STÍLUSOK (KÉPEKHEZ) */
         #page-login .container {
@@ -298,7 +297,7 @@
             border-color: var(--accent-pink);
         }
 
-        /* VERS OLDAL STÍLUSOK */
+        /* VERS OLDAL STÍLUSOK (MOBILRA OPTIMALIZÁLVA) */
         #page-poem .container {
             border: 3px solid var(--accent-gold);
             background: linear-gradient(135deg, #fff0f5, #ffffff);
@@ -321,18 +320,39 @@
             letter-spacing: 2px;
         }
         #page-poem .poem-text {
-            font-size: 1.25rem;
-            line-height: 2.2;
+            font-size: 1.15rem;
+            line-height: 2;
             color: var(--text-color);
             margin-bottom: 30px;
-            white-space: pre-wrap; 
+            white-space: pre-line; /* Összevonja a kód behúzásait, de megtartja a sortöréseket */
             font-family: 'Georgia', serif;
+            text-align: center; /* Garantálja a középre igazítást */
+            padding: 0 10px;
         }
         .poem-divider {
             border: 0;
             border-top: 1px solid var(--accent-gold);
             margin: 40px 0;
             opacity: 0.4;
+        }
+
+        /* MOBILOS NÉZET BEÁLLÍTÁSAI */
+        @media (max-width: 480px) {
+            #page-poem .container {
+                padding: 25px 15px;
+            }
+            #page-poem h2 {
+                font-size: 2.3rem; /* Kicsit kisebb cím telón */
+                margin-bottom: 15px;
+            }
+            #page-poem .poem-text {
+                font-size: 1.05rem; /* Kisebb, kényelmesen olvasható betűméret */
+                line-height: 1.8;
+                padding: 0 5px;
+            }
+            #page-poem .poem-date {
+                font-size: 1.2rem;
+            }
         }
 
     </style>
@@ -350,7 +370,7 @@
         </div>
     </div>
 
-    <!-- FŐMENÜ, KIEGÉSZÍTVE A VERSEK GOMBBAL -->
+    <!-- FŐMENÜ -->
     <div id="page-main-menu" class="container hidden">
         <h1>Válassz egy opciót!</h1>
         <p>Üdvözöllek az oldalamon, mit szeretnél csinálni?</p>
@@ -364,7 +384,6 @@
         <button class="btn" onclick="handleMenuClick('gallery')">
             <span>📸</span> Képek
         </button>
-        <!-- ÚJ GOMB A FŐMENÜBEN -->
         <button class="btn" onclick="handleMenuClick('poem')">
             <span>📜</span> Versek
         </button>
@@ -391,30 +410,30 @@
         <div class="poem-date">Augusztus 15.</div>
         <h2>TÓPART</h2>
         <div class="poem-text">
-            A tóparton ketten
-            Némán, szép csendben
-            Természet lágy ölén
-            Kéz a kézben ülvén
+A tóparton ketten
+Némán, szép csendben
+Természet lágy ölén
+Kéz a kézben ülvén
 
-            Madarak énekelnek
-            Vígan csiripelnek
-            Víznek hullámzása
-            Szívem dobbanása
+Madarak énekelnek
+Vígan csiripelnek
+Víznek hullámzása
+Szívem dobbanása
 
-            Fényes szikra lobban
-            Szívem nagyot dobban
-            Szemed látványában
-            Angyal formájában
+Fényes szikra lobban
+Szívem nagyot dobban
+Szemed látványában
+Angyal formájában
 
-            Titkos, mély érzés
-            Lelassul a légzés
-            Ajkaid a számon
-            Mint egy festett vászon
+Titkos, mély érzés
+Lelassul a légzés
+Ajkaid a számon
+Mint egy festett vászon
 
-            Elhalkul minden más
-            Oly lágy a suttogás
-            Itt vagyunk TE és ÉN
-            A tópart peremén
+Elhalkul minden más
+Oly lágy a suttogás
+Itt vagyunk TE és ÉN
+A tópart peremén
         </div>
 
         <hr class="poem-divider">
@@ -423,18 +442,18 @@
         <div class="poem-date">Szeptember 1.</div>
         <h2>TE</h2>
         <div class="poem-text">
-            Nem vagyok én jó ember, tudom jól de veled minden megváltozott.
-            Mikor gyönyörű kék szemedbe néztem, szomorúságom eltávozott.
-            Nem gondoltam volna, hogy engem újra egy lány ennyire elkápráztat.
-            De mikor közelségedet érzem, elfelejtem minden problémámat.
-            Veled minden is lelassul, de mégsem érzem az idő elmúlását.
-            Csak téged hallak és a saját szívverésem lüktető pulzálását.
-            Mikor a szám a szádhoz ért szívem majd kiugrott a helyéről.
-            Nem tudtam tekintetemet levenni utána a két szép szemedről.
-            Valamit érzek, valami kimondatlan de mégis csodás érzést.
-            Hiszen TE állítottad el a tátongó sebeimből folyó vérzést.
-            Szerelmes lettem a tekintetedbe, a mosolyodba, illatodba.
-            Miattad érzem magamat újra, fent, magasan a csillagokban.
+Nem vagyok én jó ember, tudom jól de veled minden megváltozott.
+Mikor gyönyörű kék szemedbe néztem, szomorúságom eltávozott.
+Nem gondoltam volna, hogy engem újra egy lány ennyire elkápráztat.
+De mikor közelségedet érzem, elfelejtem minden problémámat.
+Veled minden is lelassul, de mégsem érzem az idő elmúlását.
+Csak téged hallak és a saját szívverésem lüktető pulzálását.
+Mikor a szám a szádhoz ért szívem majd kiugrott a helyéről.
+Nem tudtam tekintetemet levenni utána a két szép szemedről.
+Valamit érzek, valami kimondatlan de mégis csodás érzést.
+Hiszen TE állítottad el a tátongó sebeimből folyó vérzést.
+Szerelmes lettem a tekintetedbe, a mosolyodba, illatodba.
+Miattad érzem magamat újra, fent, magasan a csillagokban.
         </div>
 
         <div class="signature">Szeretettel Bendzsámin ✨</div>
@@ -617,7 +636,7 @@
         function showPoemPage() {
             hideAllSections();
             document.getElementById('page-poem').classList.remove('hidden');
-            document.getElementById('body').className = 'theme-randi'; // Adunk neki egy romantikus, rózsaszínes hátteret
+            document.getElementById('body').className = 'theme-randi'; 
         }
 
         function showMainMenu() {
@@ -640,7 +659,7 @@
             } else if (action === 'gallery') {
                 hideAllSections();
                 document.getElementById('page-login').classList.remove('hidden');
-            } else if (action === 'poem') { // ÚJ ÁG A VERSEKHEZ
+            } else if (action === 'poem') { 
                 showPoemPage();
             }
         }
