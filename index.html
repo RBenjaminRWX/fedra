@@ -219,9 +219,11 @@
             font-size: 1.5rem;
             margin-right: 15px;
         }
-        #page-main-menu .btn:nth-child(1) span { color: var(--accent-pink); }
-        #page-main-menu .btn:nth-child(2) span { color: var(--accent-gold); }
-        #page-main-menu .btn:nth-child(3) span { color: var(--accent-red); }
+        /* Módosítottam nth-of-type-ra, hogy pontosan a gombokat színezze */
+        #page-main-menu .btn:nth-of-type(1) span { color: var(--accent-pink); }
+        #page-main-menu .btn:nth-of-type(2) span { color: var(--accent-gold); }
+        #page-main-menu .btn:nth-of-type(3) span { color: var(--accent-red); }
+        #page-main-menu .btn:nth-of-type(4) span { color: #9933ff; } /* A versek ikon színe (lila) */
 
         /* BELÉPÉSI OLDAL STÍLUSOK (KÉPEKHEZ) */
         #page-login .container {
@@ -348,6 +350,7 @@
         </div>
     </div>
 
+    <!-- FŐMENÜ, KIEGÉSZÍTVE A VERSEK GOMBBAL -->
     <div id="page-main-menu" class="container hidden">
         <h1>Válassz egy opciót!</h1>
         <p>Üdvözöllek az oldalamon, mit szeretnél csinálni?</p>
@@ -360,6 +363,10 @@
         </button>
         <button class="btn" onclick="handleMenuClick('gallery')">
             <span>📸</span> Képek
+        </button>
+        <!-- ÚJ GOMB A FŐMENÜBEN -->
+        <button class="btn" onclick="handleMenuClick('poem')">
+            <span>📜</span> Versek
         </button>
     </div>
 
@@ -375,7 +382,7 @@
         <div id="loginError" class="error-text hidden">❌ Helytelen jelszó!</div>
     </div>
 
-    <!-- ÚJ VERSEK SZEKCIÓ (TÖBB DÁTUMMAL) -->
+    <!-- VERSEK SZEKCIÓ -->
     <div id="page-poem" class="container hidden">
         <button class="btn-back" onclick="showMainMenu()">⬅ Vissza a Főmenübe</button>
         <h2>Versek Fédrának</h2>
@@ -408,7 +415,6 @@
             Oly lágy a suttogás
             Itt vagyunk TE és ÉN
             A tópart peremén
-
         </div>
 
         <hr class="poem-divider">
@@ -622,6 +628,7 @@
             document.getElementById('loginError').classList.add('hidden');
         }
 
+        // --- FRISSÍTETT MENÜ KEZELŐ ---
         function handleMenuClick(action) {
             if (action === 'booking') {
                 hideAllSections();
@@ -633,6 +640,8 @@
             } else if (action === 'gallery') {
                 hideAllSections();
                 document.getElementById('page-login').classList.remove('hidden');
+            } else if (action === 'poem') { // ÚJ ÁG A VERSEKHEZ
+                showPoemPage();
             }
         }
 
