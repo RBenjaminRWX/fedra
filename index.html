@@ -1,415 +1,2060 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Krista Fédra - Weboldal</title>
-    <style>
-        /* ALAPÉRTELMEZETT TÉMA ÉS ÚJ SZÍNEK */
-        :root {
-            --bg-color: #f4f6f9;
-            --container-bg: #ffffff;
-            --text-color: #2c3e50;
-            --primary-btn: #3498db;
-            --primary-hover: #2980b9;
-            --font-family: 'Georgia', serif; 
-            --accent-gold: #d4af37;
-            --accent-red: #a52a2a;
-            --accent-pink: #ff66b2;
-            --accent-black: #1a1a1a;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fédra World 💗</title>
 
-        /* TÉMÁK SZÍNEI */
-        body.theme-randi {
-            --bg-color: #ffe6f2; --container-bg: #fff0f5;
-            --text-color: #800040; --primary-btn: #ff66b2; --primary-hover: #e60073;
-        }
-        body.theme-kondi {
-            --bg-color: #1a1a1a; --container-bg: #333333;
-            --text-color: #f2f2f2; --primary-btn: #ff4500; --primary-hover: #cc3700;
-        }
-        body.theme-kajalas {
-            --bg-color: #fff3e6; --container-bg: #ffebcc;
-            --text-color: #8b4513; --primary-btn: #ff8c00; --primary-hover: #e67e00;
-        }
-        body.theme-egyeb {
-            --bg-color: #f0e6ff; --container-bg: #ffffff;
-            --text-color: #330066; --primary-btn: #9933ff; --primary-hover: #7300e6;
-        }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
 
-        /* ALAP STÍLUSOK */
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-family);
-            margin: 0;
-            padding: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            transition: all 0.5s ease;
-            box-sizing: border-box;
-        }
+:root{
+    --pink:#ff4fa3;
+    --pink2:#ff82bd;
+    --pink3:#ffc1df;
+    --rose:#e62f82;
+    --purple:#a855f7;
+    --dark:#42132f;
+    --text:#64264b;
+    --white:#fff;
+    --glass:rgba(255,255,255,.48);
+    --border:rgba(255,255,255,.65);
+    --shadow:0 30px 90px rgba(125,20,77,.22);
+}
 
-        .container {
-            background-color: var(--container-bg);
-            padding: 25px 20px;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-            max-width: 600px;
-            width: 100%;
-            text-align: center;
-            box-sizing: border-box;
-        }
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-        h1 { font-size: 1.8rem; margin-top: 0; color: var(--accent-black); }
-        h2 { font-size: 1.6rem; margin-top: 0; margin-bottom: 20px; color: var(--accent-black); }
-        h3 { font-size: 1.4rem; margin-top: 15px; color: var(--accent-black); }
+html{
+    scroll-behavior:smooth;
+}
 
-        .btn-back {
-            background: none;
-            border: none;
-            color: var(--primary-btn);
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            padding: 0;
-            margin-bottom: 20px;
-            text-align: left;
-            display: inline-block;
-            width: 100%;
-            font-family: var(--font-family);
-        }
-        .btn-back:hover { text-decoration: underline; }
+body{
+    min-height:100vh;
+    overflow-x:hidden;
+    font-family:"DM Sans",sans-serif;
+    color:var(--text);
+    background:
+        radial-gradient(circle at 10% 10%,#fff 0,transparent 22%),
+        radial-gradient(circle at 90% 15%,rgba(255,89,169,.45),transparent 27%),
+        radial-gradient(circle at 70% 90%,rgba(174,92,255,.35),transparent 30%),
+        linear-gradient(135deg,#ffd8eb,#ffb1d4 42%,#f5c8ee 70%,#d6b8ff);
+    background-attachment:fixed;
+}
 
-        .btn {
-            background-color: var(--primary-btn);
-            color: white;
-            border: none;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-            transition: background 0.3s;
-            font-weight: bold;
-            box-sizing: border-box;
-            font-family: var(--font-family);
-        }
+button,
+input,
+select{
+    font-family:inherit;
+}
 
-        .btn:hover { background-color: var(--primary-hover); }
-        .btn:disabled { background-color: #ccc; cursor: not-allowed; }
-        .btn-secondary { background-color: #7f8c8d; margin-top: 20px; }
-        .btn-secondary:hover { background-color: #95a5a6; }
+button{
+    cursor:pointer;
+}
 
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
+.hidden{
+    display:none!important;
+}
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            font-size: 14px;
-        }
+/* =========================================================
+   HÁTTÉR
+========================================================= */
 
-        input[type="text"], input[type="password"], input[type="number"], input[type="date"], select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-family: inherit;
-            font-size: 15px;
-            background-color: #fff;
-            color: #333;
-        }
+.background{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:-10;
+}
 
-        .hidden { display: none !important; }
+.glow{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(10px);
+    opacity:.35;
+    animation:glowMove 15s ease-in-out infinite alternate;
+}
 
-        .booking-card {
-            background: rgba(255, 255, 255, 0.85);
-            border-left: 5px solid var(--primary-btn);
-            padding: 12px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            color: #000;
-            text-align: left;
-            font-size: 14px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
+.glow.one{
+    width:420px;
+    height:420px;
+    background:#ff5ca9;
+    top:-180px;
+    left:-130px;
+}
 
-        /* CSÚSZKA STÍLUSOK */
-        .slider-container {
-            background: rgba(0,0,0,0.03);
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            margin-top: 10px;
-        }
-        .slider-group { margin-bottom: 15px; }
-        .slider-group span { font-weight: bold; color: var(--primary-btn); font-size: 16px; }
-        input[type=range] { width: 100%; margin: 10px 0; }
-        #status-message { font-weight: bold; padding: 10px; border-radius: 5px; text-align: center; margin-top: 10px; }
-        .status-free { background-color: #e8f8f5; color: #2ecc71; border: 1px solid #2ecc71; }
-        .status-booked { background-color: #fdedec; color: #e74c3c; border: 1px solid #e74c3c; }
-        .booked-slots-list {
-            font-size: 13px; color: var(--text-color); margin-top: 10px;
-            background: rgba(255,255,255,0.5); padding: 10px; border-radius: 5px; border-left: 3px solid #e74c3c;
-        }
+.glow.two{
+    width:350px;
+    height:350px;
+    background:#ad67ff;
+    right:-100px;
+    top:35%;
+    animation-delay:3s;
+}
 
-        /* POP-UP STÍLUSOK */
-        #intro-popup {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 1000;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .popup-content {
-            background-color: #fff;
-            color: #333;
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 500px;
-            text-align: justify;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            font-family: 'Georgia', serif;
-            line-height: 1.6;
-        }
-        .signature {
-            font-family: 'Brush Script MT', 'Dancing Script', 'Comic Sans MS', cursive;
-            font-size: 2.2rem;
-            color: #ff66b2;
-            text-align: right;
-            margin-top: 15px;
-            margin-bottom: 25px;
-        }
-        .error-text {
-            color: #e74c3c;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 10px;
-        }
+.glow.three{
+    width:400px;
+    height:400px;
+    background:#ffb6d9;
+    bottom:-220px;
+    left:30%;
+    animation-delay:6s;
+}
 
-        /* ÚJ FŐMENÜ STÍLUSOK */
-        #page-main-menu .btn {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 18px 25px;
-            font-size: 1.1rem;
-            background-color: var(--container-bg);
-            color: var(--accent-black);
-            border: 2px solid var(--accent-black);
-            box-shadow: none;
-            transition: all 0.3s ease;
-        }
-        #page-main-menu .btn:hover {
-            background-color: var(--accent-black);
-            color: white;
-            border-color: var(--accent-black);
-        }
-        #page-main-menu .btn span {
-            font-size: 1.5rem;
-            margin-right: 15px;
-        }
-        #page-main-menu .btn:nth-of-type(1) span { color: var(--accent-pink); }
-        #page-main-menu .btn:nth-of-type(2) span { color: var(--accent-gold); }
-        #page-main-menu .btn:nth-of-type(3) span { color: var(--accent-red); }
-        #page-main-menu .btn:nth-of-type(4) span { color: #9933ff; }
+@keyframes glowMove{
+    from{
+        transform:translate(0,0) scale(1);
+    }
+    to{
+        transform:translate(80px,-50px) scale(1.18);
+    }
+}
 
-        /* BELÉPÉSI OLDAL STÍLUSOK (KÉPEKHEZ) */
-        #page-login .container {
-            border: 5px solid var(--accent-black);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        #page-login h1 { color: var(--accent-red); font-size: 2rem; }
+.particle{
+    position:absolute;
+    opacity:0;
+    user-select:none;
+    animation:rise linear infinite;
+    filter:drop-shadow(0 7px 10px rgba(122,18,74,.18));
+}
 
-        /* SZEMÉLYI EDZÉS STÍLUSOK */
-        #page-training .container {
-            max-width: 700px;
-            background-color: #1a1a1a;
-            color: #f2f2f2;
-            border: 3px solid var(--accent-gold);
-            padding: 30px;
-        }
-        #page-training h2 { color: var(--accent-gold); border-bottom: 2px solid var(--accent-gold); display: inline-block; padding-bottom: 5px; }
-        #page-training .training-poster {
-            max-width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.5);
-            margin-bottom: 25px;
-        }
-        #page-training .details-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            text-align: left;
-        }
-        #page-training .detail-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid var(--accent-gold);
-        }
-        #page-training .detail-item h3 { color: var(--accent-gold); margin-top: 0; }
-        #page-training .training-footer {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 2px solid rgba(255, 255, 255, 0.1);
-            color: #ccc;
-        }
-        #page-training .training-call {
-            font-size: 1.2rem;
-            color: var(--accent-pink);
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
+@keyframes rise{
+    0%{
+        transform:translate3d(0,110vh,0) rotate(-15deg) scale(.6);
+        opacity:0;
+    }
+    10%{
+        opacity:.75;
+    }
+    50%{
+        transform:translate3d(70px,50vh,0) rotate(15deg) scale(1);
+    }
+    90%{
+        opacity:.7;
+    }
+    100%{
+        transform:translate3d(-60px,-15vh,0) rotate(-12deg) scale(.8);
+        opacity:0;
+    }
+}
 
-        /* KÉPEK STÍLUSOK JAVÍTVA */
-        #page-gallery .container {
-            max-width: 800px;
-        }
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
-            padding: 20px 0;
-        }
-        .gallery-item {
-            width: 100%;
-            height: 150px;
-            border-radius: 10px;
-            object-fit: cover;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            border: 3px solid transparent;
-            background-color: #eee;
-            transition: all 0.3s ease;
-        }
-        .gallery-item:hover {
-            transform: scale(1.05);
-            border-color: var(--accent-pink);
-        }
+/* =========================================================
+   NAVIGÁCIÓ
+========================================================= */
 
-        /* VERS OLDAL STÍLUSOK (MOBILRA OPTIMALIZÁLVA) */
-        #page-poem .container {
-            border: 3px solid var(--accent-gold);
-            background: linear-gradient(135deg, #fff0f5, #ffffff);
-            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2);
-            padding: 40px 30px;
-        }
-        #page-poem h2 {
-            font-family: 'Brush Script MT', 'Dancing Script', 'Comic Sans MS', cursive;
-            font-size: 3rem;
-            color: var(--accent-pink);
-            margin-bottom: 25px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-        #page-poem .poem-date {
-            font-weight: bold;
-            color: var(--accent-gold);
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        #page-poem .poem-text {
-            font-size: 1.15rem;
-            line-height: 2;
-            color: var(--text-color);
-            margin-bottom: 30px;
-            white-space: pre-line; /* Összevonja a kód behúzásait, de megtartja a sortöréseket */
-            font-family: 'Georgia', serif;
-            text-align: center; /* Garantálja a középre igazítást */
-            padding: 0 10px;
-        }
-        .poem-divider {
-            border: 0;
-            border-top: 1px solid var(--accent-gold);
-            margin: 40px 0;
-            opacity: 0.4;
-        }
+.topbar{
+    position:fixed;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(1180px,calc(100% - 35px));
+    z-index:100;
+    padding:13px 18px;
+    border:1px solid var(--border);
+    border-radius:22px;
+    background:rgba(255,255,255,.5);
+    backdrop-filter:blur(24px);
+    -webkit-backdrop-filter:blur(24px);
+    box-shadow:0 15px 45px rgba(108,17,66,.14);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
 
-        /* MOBILOS NÉZET BEÁLLÍTÁSAI */
-        @media (max-width: 480px) {
-            #page-poem .container {
-                padding: 25px 15px;
-            }
-            #page-poem h2 {
-                font-size: 2.3rem; /* Kicsit kisebb cím telón */
-                margin-bottom: 15px;
-            }
-            #page-poem .poem-text {
-                font-size: 1.05rem; /* Kisebb, kényelmesen olvasható betűméret */
-                line-height: 1.8;
-                padding: 0 5px;
-            }
-            #page-poem .poem-date {
-                font-size: 1.2rem;
-            }
-        }
+.logo{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    font-weight:900;
+    font-size:1.15rem;
+    color:#8e1e5b;
+}
 
-    </style>
+.logo-icon{
+    width:40px;
+    height:40px;
+    border-radius:13px;
+    display:grid;
+    place-items:center;
+    color:white;
+    font-size:21px;
+    background:linear-gradient(135deg,#ff4fa3,#b957ed);
+    box-shadow:0 8px 20px rgba(220,43,128,.3);
+}
+
+.nav{
+    display:flex;
+    gap:5px;
+}
+
+.nav button{
+    border:0;
+    background:transparent;
+    color:#7d315b;
+    padding:10px 13px;
+    border-radius:12px;
+    font-weight:700;
+    transition:.25s;
+}
+
+.nav button:hover{
+    color:#d52078;
+    background:rgba(255,255,255,.65);
+}
+
+.nav-heart{
+    color:#ff4fa3;
+    font-size:18px;
+}
+
+/* =========================================================
+   ÁLTALÁNOS OLDAL
+========================================================= */
+
+.page{
+    width:min(1180px,calc(100% - 35px));
+    margin:0 auto;
+    padding-top:115px;
+    padding-bottom:50px;
+    animation:pageIn .65s ease;
+}
+
+@keyframes pageIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+.card{
+    border:1px solid rgba(255,255,255,.7);
+    background:rgba(255,255,255,.47);
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+    box-shadow:var(--shadow);
+    border-radius:34px;
+}
+
+.section{
+    padding:40px;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    min-height:620px;
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:30px;
+    align-items:center;
+    padding:65px;
+    overflow:hidden;
+    position:relative;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:550px;
+    height:550px;
+    right:-180px;
+    top:-160px;
+    border-radius:50%;
+    background:linear-gradient(135deg,rgba(255,79,163,.4),rgba(174,88,247,.3));
+    filter:blur(5px);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:9px 15px;
+    border-radius:30px;
+    background:rgba(255,255,255,.65);
+    border:1px solid rgba(255,255,255,.8);
+    color:#bd216d;
+    font-size:.82rem;
+    font-weight:800;
+    margin-bottom:20px;
+    box-shadow:0 8px 25px rgba(130,20,78,.08);
+}
+
+.hero h1{
+    font-family:"Playfair Display",serif;
+    font-size:clamp(3.3rem,7vw,6.5rem);
+    line-height:.95;
+    letter-spacing:-4px;
+    margin-bottom:25px;
+    color:#68153f;
+}
+
+.gradient-text{
+    background:linear-gradient(90deg,#ed287f,#ff59a9,#a64ee5);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    max-width:650px;
+    font-size:1.12rem;
+    line-height:1.8;
+    color:#733354;
+    margin-bottom:30px;
+}
+
+.hero-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.primary{
+    border:0;
+    padding:16px 25px;
+    border-radius:17px;
+    color:white;
+    font-weight:900;
+    background:linear-gradient(135deg,#ff4fa3,#d5227a);
+    box-shadow:0 15px 35px rgba(213,34,122,.3);
+    transition:.3s;
+}
+
+.primary:hover{
+    transform:translateY(-4px) scale(1.02);
+    box-shadow:0 20px 45px rgba(213,34,122,.4);
+}
+
+.secondary{
+    border:1px solid rgba(255,255,255,.8);
+    padding:16px 25px;
+    border-radius:17px;
+    color:#8d2d61;
+    font-weight:800;
+    background:rgba(255,255,255,.6);
+    transition:.3s;
+}
+
+.secondary:hover{
+    transform:translateY(-4px);
+    background:white;
+}
+
+/* =========================================================
+   HERO VIZUÁLIS
+========================================================= */
+
+.hero-art{
+    position:relative;
+    height:420px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.orbit{
+    position:absolute;
+    width:300px;
+    height:300px;
+    border:1px solid rgba(255,79,163,.3);
+    border-radius:50%;
+    animation:spin 16s linear infinite;
+}
+
+.orbit.two{
+    width:220px;
+    height:220px;
+    animation-duration:11s;
+    animation-direction:reverse;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.main-bunny{
+    width:210px;
+    height:210px;
+    display:grid;
+    place-items:center;
+    border-radius:60px;
+    font-size:115px;
+    background:linear-gradient(145deg,rgba(255,255,255,.8),rgba(255,184,218,.55));
+    border:1px solid rgba(255,255,255,.9);
+    box-shadow:
+        0 30px 70px rgba(132,22,78,.18),
+        inset 0 1px 0 white;
+    animation:bunnyFloat 4s ease-in-out infinite;
+    position:relative;
+    z-index:2;
+}
+
+@keyframes bunnyFloat{
+    0%,100%{
+        transform:translateY(0) rotate(-2deg);
+    }
+    50%{
+        transform:translateY(-18px) rotate(2deg);
+    }
+}
+
+.floating-card{
+    position:absolute;
+    padding:12px 17px;
+    border-radius:17px;
+    background:rgba(255,255,255,.78);
+    border:1px solid white;
+    box-shadow:0 15px 35px rgba(100,15,60,.12);
+    font-weight:800;
+    color:#a62468;
+    z-index:3;
+    animation:floatCard 4s ease-in-out infinite;
+}
+
+.fc1{
+    top:35px;
+    left:0;
+}
+
+.fc2{
+    bottom:45px;
+    right:0;
+    animation-delay:1s;
+}
+
+.fc3{
+    top:90px;
+    right:10px;
+    animation-delay:2s;
+}
+
+@keyframes floatCard{
+    50%{
+        transform:translateY(-10px);
+    }
+}
+
+/* =========================================================
+   STATISZTIKA
+========================================================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-top:20px;
+}
+
+.stat{
+    padding:24px;
+    border-radius:23px;
+    background:rgba(255,255,255,.55);
+    border:1px solid rgba(255,255,255,.7);
+    text-align:center;
+    transition:.3s;
+}
+
+.stat:hover{
+    transform:translateY(-7px);
+    background:rgba(255,255,255,.75);
+}
+
+.stat-icon{
+    font-size:27px;
+    margin-bottom:8px;
+}
+
+.stat strong{
+    display:block;
+    font-size:1.7rem;
+    color:#bd216d;
+}
+
+.stat span{
+    font-size:.82rem;
+    color:#7d4562;
+}
+
+/* =========================================================
+   MENÜKÁRTYÁK
+========================================================= */
+
+.menu-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+    margin-top:25px;
+}
+
+.menu-card{
+    padding:30px;
+    min-height:210px;
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.75);
+    border-radius:28px;
+    background:rgba(255,255,255,.55);
+    box-shadow:0 18px 45px rgba(100,15,60,.1);
+    transition:.4s cubic-bezier(.2,.8,.2,1);
+    cursor:pointer;
+}
+
+.menu-card:hover{
+    transform:translateY(-9px);
+    box-shadow:0 28px 60px rgba(100,15,60,.18);
+}
+
+.menu-card::after{
+    content:"";
+    position:absolute;
+    width:170px;
+    height:170px;
+    border-radius:50%;
+    right:-70px;
+    bottom:-70px;
+    background:rgba(255,90,169,.16);
+}
+
+.menu-icon{
+    width:57px;
+    height:57px;
+    display:grid;
+    place-items:center;
+    border-radius:19px;
+    font-size:27px;
+    margin-bottom:20px;
+    background:linear-gradient(135deg,#ff72b5,#bd57e9);
+    box-shadow:0 12px 25px rgba(195,54,133,.22);
+}
+
+.menu-card h3{
+    font-size:1.4rem;
+    color:#72194a;
+    margin-bottom:8px;
+}
+
+.menu-card p{
+    line-height:1.6;
+    color:#86506d;
+    font-size:.93rem;
+}
+
+.arrow{
+    position:absolute;
+    right:25px;
+    top:28px;
+    font-size:24px;
+    color:#df3985;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:500;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    background:rgba(66,15,47,.42);
+    backdrop-filter:blur(15px);
+}
+
+.modal-box{
+    width:min(620px,100%);
+    max-height:90vh;
+    overflow:auto;
+    padding:45px;
+    border-radius:34px;
+    background:rgba(255,255,255,.91);
+    border:1px solid white;
+    box-shadow:0 40px 120px rgba(69,8,45,.35);
+    animation:modalIn .55s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes modalIn{
+    from{
+        opacity:0;
+        transform:translateY(30px) scale(.9);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+.modal-box h2{
+    font-family:"Playfair Display",serif;
+    font-size:2.4rem;
+    color:#75174b;
+    margin-bottom:20px;
+}
+
+.modal-box p{
+    line-height:1.8;
+    margin-bottom:15px;
+}
+
+.signature{
+    font-family:"Brush Script MT",cursive;
+    text-align:right;
+    font-size:2.3rem;
+    color:#ed3d91;
+    margin:20px 0;
+}
+
+/* =========================================================
+   BELSŐ OLDAL FEJLÉC
+========================================================= */
+
+.sub-header{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:30px;
+}
+
+.sub-header h2{
+    font-family:"Playfair Display",serif;
+    font-size:3rem;
+    color:#68163f;
+}
+
+.sub-header p{
+    max-width:500px;
+    color:#7d4563;
+}
+
+.back{
+    border:0;
+    border-radius:14px;
+    padding:10px 15px;
+    color:#8b2b60;
+    font-weight:800;
+    background:rgba(255,255,255,.65);
+    transition:.25s;
+}
+
+.back:hover{
+    transform:translateX(-5px);
+    background:white;
+}
+
+/* =========================================================
+   FOGLALÁSI OLDAL
+========================================================= */
+
+.booking-layout{
+    display:grid;
+    grid-template-columns:330px 1fr;
+    gap:25px;
+}
+
+.booking-sidebar{
+    padding:25px;
+    border-radius:28px;
+    background:rgba(255,255,255,.55);
+    border:1px solid rgba(255,255,255,.75);
+}
+
+.booking-sidebar h3{
+    margin-bottom:18px;
+    color:#75174b;
+}
+
+.type-btn{
+    width:100%;
+    border:1px solid rgba(255,255,255,.8);
+    background:rgba(255,255,255,.55);
+    border-radius:17px;
+    padding:15px;
+    margin:6px 0;
+    display:flex;
+    align-items:center;
+    gap:13px;
+    color:#752450;
+    font-weight:800;
+    text-align:left;
+    transition:.25s;
+}
+
+.type-btn:hover,
+.type-btn.active{
+    color:white;
+    transform:translateX(5px);
+    background:linear-gradient(135deg,#ff4fa3,#bd55e6);
+    box-shadow:0 10px 25px rgba(194,48,128,.22);
+}
+
+.type-icon{
+    width:38px;
+    height:38px;
+    display:grid;
+    place-items:center;
+    border-radius:12px;
+    background:rgba(255,255,255,.7);
+    font-size:20px;
+}
+
+.booking-main{
+    padding:32px;
+    min-height:500px;
+    border-radius:28px;
+    background:rgba(255,255,255,.55);
+    border:1px solid rgba(255,255,255,.75);
+}
+
+.empty-state{
+    min-height:430px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.empty-state .big-icon{
+    font-size:70px;
+    animation:bunnyFloat 4s ease-in-out infinite;
+}
+
+.empty-state h3{
+    font-size:1.6rem;
+    margin:15px 0 8px;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+label{
+    display:block;
+    margin-bottom:7px;
+    font-size:.85rem;
+    font-weight:800;
+    color:#71204b;
+}
+
+input,
+select{
+    width:100%;
+    border:1px solid rgba(220,68,139,.2);
+    border-radius:15px;
+    padding:14px 15px;
+    outline:none;
+    color:#54223e;
+    background:rgba(255,255,255,.76);
+    transition:.25s;
+}
+
+input:focus,
+select:focus{
+    border-color:#ff4fa3;
+    box-shadow:0 0 0 5px rgba(255,79,163,.12);
+}
+
+/* =========================================================
+   IDŐPONT
+========================================================= */
+
+.time-box{
+    margin-top:20px;
+    padding:23px;
+    border-radius:22px;
+    background:rgba(255,235,245,.62);
+    border:1px solid rgba(255,255,255,.8);
+}
+
+.slider-group{
+    margin:20px 0;
+}
+
+.slider-title{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:9px;
+    font-weight:800;
+}
+
+.slider-title span{
+    color:#d3297c;
+}
+
+input[type=range]{
+    padding:0;
+    height:7px;
+    accent-color:#ff4fa3;
+    border:0;
+}
+
+.status{
+    padding:13px;
+    border-radius:13px;
+    text-align:center;
+    font-weight:800;
+}
+
+.free{
+    background:#def8eb;
+    color:#188258;
+}
+
+.booked{
+    background:#ffe0e9;
+    color:#c32e52;
+}
+
+.booked-slots{
+    padding:14px;
+    border-radius:14px;
+    background:rgba(255,205,224,.65);
+    margin-bottom:18px;
+    font-size:.88rem;
+    line-height:1.8;
+}
+
+/* =========================================================
+   KERESÉS
+========================================================= */
+
+.search-box{
+    max-width:850px;
+    margin:auto;
+}
+
+.search-result{
+    margin-top:14px;
+    padding:20px;
+    border-radius:20px;
+    background:rgba(255,255,255,.65);
+    border:1px solid rgba(255,255,255,.8);
+    transition:.3s;
+}
+
+.search-result:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 30px rgba(110,20,65,.1);
+}
+
+.error{
+    color:#d32951;
+    font-weight:800;
+    text-align:center;
+    margin-top:12px;
+}
+
+/* =========================================================
+   EDZÉS
+========================================================= */
+
+.training-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.training-card{
+    padding:28px;
+    min-height:230px;
+    border-radius:25px;
+    background:rgba(255,255,255,.58);
+    border:1px solid rgba(255,255,255,.8);
+    transition:.35s;
+}
+
+.training-card:hover{
+    transform:translateY(-8px) rotate(.5deg);
+    box-shadow:0 25px 45px rgba(110,20,65,.14);
+}
+
+.training-card .icon{
+    font-size:36px;
+    margin-bottom:18px;
+}
+
+.training-card h3{
+    color:#74194b;
+    margin-bottom:10px;
+}
+
+.training-card p{
+    line-height:1.7;
+    font-size:.92rem;
+}
+
+.contact-banner{
+    margin-top:22px;
+    padding:30px;
+    border-radius:25px;
+    color:white;
+    text-align:center;
+    background:linear-gradient(135deg,#ed398c,#a652e3);
+    box-shadow:0 20px 40px rgba(179,49,132,.22);
+}
+
+.contact-banner strong{
+    display:block;
+    font-size:1.5rem;
+    margin-bottom:10px;
+}
+
+/* =========================================================
+   GALÉRIA
+========================================================= */
+
+.gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.gallery-item{
+    height:220px;
+    border-radius:24px;
+    object-fit:cover;
+    width:100%;
+    border:3px solid rgba(255,255,255,.8);
+    background:rgba(255,255,255,.5);
+    transition:.45s;
+}
+
+.gallery-item:hover{
+    transform:scale(1.05) rotate(1deg);
+    box-shadow:0 20px 45px rgba(110,20,65,.2);
+}
+
+/* =========================================================
+   VERSEK
+========================================================= */
+
+.poems{
+    max-width:900px;
+    margin:auto;
+}
+
+.poem{
+    margin-bottom:25px;
+    padding:35px;
+    border-radius:28px;
+    background:rgba(255,255,255,.58);
+    border:1px solid rgba(255,255,255,.8);
+    box-shadow:0 15px 40px rgba(100,15,60,.08);
+}
+
+.poem-date{
+    text-align:center;
+    text-transform:uppercase;
+    letter-spacing:4px;
+    font-size:.75rem;
+    font-weight:900;
+    color:#c72b76;
+    margin-bottom:8px;
+}
+
+.poem h3{
+    text-align:center;
+    font-family:"Playfair Display",serif;
+    font-size:2rem;
+    margin-bottom:20px;
+}
+
+.poem-text{
+    white-space:pre-line;
+    text-align:center;
+    font-family:Georgia,serif;
+    line-height:2;
+    color:#69324e;
+}
+
+.poem-sign{
+    text-align:right;
+    font-family:"Brush Script MT",cursive;
+    font-size:2rem;
+    color:#e53a8b;
+    margin-top:20px;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+    text-align:center;
+    padding:25px;
+    color:#81435f;
+    font-size:.85rem;
+}
+
+/* =========================================================
+   MOBIL
+========================================================= */
+
+@media(max-width:900px){
+
+    .hero{
+        grid-template-columns:1fr;
+        padding:45px 30px;
+    }
+
+    .hero-art{
+        height:330px;
+    }
+
+    .booking-layout{
+        grid-template-columns:1fr;
+    }
+
+    .training-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .gallery-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+
+    .topbar{
+        top:10px;
+        width:calc(100% - 20px);
+    }
+
+    .nav{
+        display:none;
+    }
+
+    .page{
+        width:calc(100% - 20px);
+        padding-top:90px;
+    }
+
+    .hero{
+        padding:35px 22px;
+        min-height:auto;
+    }
+
+    .hero h1{
+        font-size:3.4rem;
+        letter-spacing:-2px;
+    }
+
+    .hero-art{
+        height:270px;
+    }
+
+    .main-bunny{
+        width:160px;
+        height:160px;
+        font-size:85px;
+    }
+
+    .orbit{
+        width:230px;
+        height:230px;
+    }
+
+    .orbit.two{
+        width:170px;
+        height:170px;
+    }
+
+    .floating-card{
+        font-size:.75rem;
+        padding:8px 11px;
+    }
+
+    .fc1{
+        left:-5px;
+        top:20px;
+    }
+
+    .fc2{
+        right:-5px;
+        bottom:20px;
+    }
+
+    .fc3{
+        right:-5px;
+        top:65px;
+    }
+
+    .section{
+        padding:25px 18px;
+    }
+
+    .menu-grid,
+    .training-grid{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .gallery-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .gallery-item{
+        height:145px;
+        border-radius:17px;
+    }
+
+    .sub-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .sub-header h2{
+        font-size:2.3rem;
+    }
+
+    .booking-main{
+        padding:20px;
+    }
+
+    .modal-box{
+        padding:28px 20px;
+    }
+}
+</style>
 </head>
-<body class="theme-sima" id="body">
 
-    <div id="intro-popup">
-        <div class="popup-content">
-            <p><strong>Sziasztok!</strong></p>
-            <p>Fédra vagyok, egy nagyon elfoglalt 17 éves lány. Nagyon sokat kondizom, nagyon sokat járok a barátnőimmel és ezért nagyon sűrűek a mindennapi programjaim.</p>
-            <p>Legtöbbször anyának el kell engednie engem, és hogy ő is lássa, mikor van hozzám időpont foglalva, és elenged-e vagy sem... ezért szeretném, hogy itt foglaljatok hozzám időpontot!</p>
-            <div class="signature">Fédra ✨</div>
-            <button class="btn" style="background-color: #ff66b2;" onclick="closeIntro()">Tovább az oldalra ✨</button>
-            <button class="btn" style="background-color: var(--accent-gold); border: 1px solid #b8860b; margin-top: 10px;" onclick="showPoemPage()">📜 VERSEK FÉDRÁNAK</button>
+<body>
+
+<!-- =====================================================
+     ANIMÁLT HÁTTÉR
+===================================================== -->
+
+<div class="background">
+
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+    <div class="glow three"></div>
+
+    <div class="particle" style="left:3%;font-size:38px;animation-duration:17s;">🐰</div>
+    <div class="particle" style="left:12%;font-size:25px;animation-duration:13s;animation-delay:3s;">💗</div>
+    <div class="particle" style="left:23%;font-size:42px;animation-duration:20s;animation-delay:8s;">🐇</div>
+    <div class="particle" style="left:35%;font-size:28px;animation-duration:16s;animation-delay:2s;">💕</div>
+    <div class="particle" style="left:48%;font-size:40px;animation-duration:22s;animation-delay:7s;">🐰</div>
+    <div class="particle" style="left:60%;font-size:27px;animation-duration:15s;animation-delay:5s;">💖</div>
+    <div class="particle" style="left:72%;font-size:43px;animation-duration:19s;animation-delay:10s;">🐇</div>
+    <div class="particle" style="left:84%;font-size:30px;animation-duration:14s;animation-delay:1s;">💞</div>
+    <div class="particle" style="left:94%;font-size:38px;animation-duration:21s;animation-delay:6s;">🐰</div>
+
+</div>
+
+<!-- =====================================================
+     NAVIGÁCIÓ
+===================================================== -->
+
+<header class="topbar">
+
+    <div class="logo">
+        <div class="logo-icon">🐰</div>
+        <span>Fédra World</span>
+        <span class="nav-heart">♥</span>
+    </div>
+
+    <nav class="nav">
+
+        <button onclick="showHome()">Kezdőlap</button>
+
+        <button onclick="openBooking()">
+            Időpontfoglalás
+        </button>
+
+        <button onclick="openTraining()">
+            Edzés
+        </button>
+
+        <button onclick="openGallery()">
+            Galéria
+        </button>
+
+        <button onclick="showPoemPage()">
+            Versek
+        </button>
+
+    </nav>
+
+</header>
+
+
+<!-- =====================================================
+     KEZDŐLAP
+===================================================== -->
+
+<main id="homePage" class="page">
+
+    <section class="hero card">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                ✨ Üdvözöllek Fédra világában
+            </div>
+
+            <h1>
+                Hello,<br>
+                <span class="gradient-text">Fédra vagyok.</span>
+            </h1>
+
+            <p>
+                Egy 17 éves, örökmozgó lány, aki imádja a kondit,
+                a barátnőit, a programokat és természetesen azokat,
+                akik időpontot szeretnének foglalni hozzám. 💗
+            </p>
+
+            <div class="hero-buttons">
+
+                <button class="primary"
+                        onclick="openBooking()">
+                    📅 Időpontot foglalok
+                </button>
+
+                <button class="secondary"
+                        onclick="openTraining()">
+                    🏋️‍♀️ Fédra edzései
+                </button>
+
+            </div>
+
         </div>
-    </div>
 
-    <!-- FŐMENÜ -->
-    <div id="page-main-menu" class="container hidden">
-        <h1>Válassz egy opciót!</h1>
-        <p>Üdvözöllek az oldalamon, mit szeretnél csinálni?</p>
-        
-        <button class="btn" onclick="handleMenuClick('booking')">
-            <span>📅</span> Időpontfoglalás
-        </button>
-        <button class="btn" onclick="handleMenuClick('training')">
-            <span>🏋️‍♀️</span> Személyi Edzés
-        </button>
-        <button class="btn" onclick="handleMenuClick('gallery')">
-            <span>📸</span> Képek
-        </button>
-        <button class="btn" onclick="handleMenuClick('poem')">
-            <span>📜</span> Versek
-        </button>
-    </div>
+        <div class="hero-art">
 
-    <div id="page-login" class="container hidden">
-        <button class="btn-back" onclick="showMainMenu()">⬅ Vissza a Főmenübe</button>
-        <h1>Privát Galéria 📸</h1>
-        <p>A képek megtekintéséhez kérlek add meg a jelszót.</p>
-        <div class="form-group">
-            <label for="loginCode">Jelszó:</label>
-            <input type="password" id="loginCode" placeholder="Írd be a jelszót...">
+            <div class="orbit"></div>
+            <div class="orbit two"></div>
+
+            <div class="floating-card fc1">
+                💗 Busy girl
+            </div>
+
+            <div class="floating-card fc2">
+                🏋️ Gym time
+            </div>
+
+            <div class="floating-card fc3">
+                ✨ Good vibes
+            </div>
+
+            <div class="main-bunny">
+                🐰
+            </div>
+
         </div>
-        <button class="btn" style="background-color: var(--accent-red);" onclick="validateLogin()">Belépés</button>
-        <div id="loginError" class="error-text hidden">❌ Helytelen jelszó!</div>
+
+    </section>
+
+
+    <section class="stats">
+
+        <div class="stat">
+            <div class="stat-icon">💗</div>
+            <strong>17</strong>
+            <span>éves életkor</span>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">🏋️</div>
+            <strong>∞</strong>
+            <span>edzésenergia</span>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">👯‍♀️</div>
+            <strong>100%</strong>
+            <span>barátnős program</span>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">🐰</div>
+            <strong>24/7</strong>
+            <span>Fédra vibe</span>
+        </div>
+
+    </section>
+
+
+    <section class="menu-grid">
+
+        <article class="menu-card"
+                 onclick="openBooking()">
+
+            <div class="menu-icon">📅</div>
+
+            <div class="arrow">→</div>
+
+            <h3>Időpontfoglalás</h3>
+
+            <p>
+                Foglalj hozzám időpontot randira,
+                kondira, kajálásra vagy akár egy sima találkozóra.
+            </p>
+
+        </article>
+
+
+        <article class="menu-card"
+                 onclick="openTraining()">
+
+            <div class="menu-icon">🏋️‍♀️</div>
+
+            <div class="arrow">→</div>
+
+            <h3>Személyi edzés</h3>
+
+            <p>
+                Edzés, életmód, táplálkozás és motiváció
+                egy helyen.
+            </p>
+
+        </article>
+
+
+        <article class="menu-card"
+                 onclick="openGallery()">
+
+            <div class="menu-icon">📸</div>
+
+            <div class="arrow">→</div>
+
+            <h3>Privát galéria</h3>
+
+            <p>
+                Fédra fotói egy külön, jelszóval védett helyen.
+            </p>
+
+        </article>
+
+
+        <article class="menu-card"
+                 onclick="showPoemPage()">
+
+            <div class="menu-icon">📜</div>
+
+            <div class="arrow">→</div>
+
+            <h3>Versek Fédrának</h3>
+
+            <p>
+                Egy különleges kis gyűjtemény
+                néhány személyes verssel.
+            </p>
+
+        </article>
+
+    </section>
+
+
+    <div class="footer">
+        Made with 💗 for Fédra · 🐰✨
     </div>
 
-    <!-- VERSEK SZEKCIÓ -->
-    <div id="page-poem" class="container hidden">
-        <button class="btn-back" onclick="showMainMenu()">⬅ Vissza a Főmenübe</button>
-        <h2>Versek Fédrának</h2>
-        
-        <!-- AUGUSZTUS 15. VERS -->
-        <div class="poem-date">Augusztus 15.</div>
-        <h2>TÓPART</h2>
-        <div class="poem-text">
+</main>
+
+
+<!-- =====================================================
+     BEMUTATKOZÓ MODAL
+===================================================== -->
+
+<div id="introModal" class="modal">
+
+    <div class="modal-box">
+
+        <div class="badge">
+            🐰 Egy kis üzenet Fédrától
+        </div>
+
+        <h2>Sziasztok! 💗</h2>
+
+        <p>
+            Fédra vagyok, egy nagyon elfoglalt 17 éves lány.
+            Nagyon sokat kondizom, sokat járok a barátnőimmel,
+            ezért nagyon sűrűek a mindennapi programjaim.
+        </p>
+
+        <p>
+            Legtöbbször anyának el kell engednie engem,
+            és hogy ő is lássa, mikor van hozzám időpont foglalva,
+            és elenged-e vagy sem...
+            ezért szeretném, hogy itt foglaljatok hozzám időpontot! 💕
+        </p>
+
+        <div class="signature">
+            Fédra ✨
+        </div>
+
+        <button class="primary"
+                style="width:100%;"
+                onclick="closeIntro()">
+            💗 Belépés Fédra világába
+        </button>
+
+        <button class="secondary"
+                style="width:100%;margin-top:10px;"
+                onclick="closeIntro();showPoemPage();">
+            📜 Először megnézem a verseket
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     FOGLALÁS
+===================================================== -->
+
+<main id="bookingPage" class="page hidden">
+
+    <section class="card section">
+
+        <div class="sub-header">
+
+            <div>
+                <button class="back"
+                        onclick="showHome()">
+                    ← Kezdőlap
+                </button>
+
+                <h2>Időpontfoglalás 💗</h2>
+
+                <p>
+                    Válaszd ki, milyen programot szeretnél
+                    Fédrával.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="booking-layout">
+
+            <aside class="booking-sidebar">
+
+                <h3>Mit szeretnél? ✨</h3>
+
+                <button class="type-btn"
+                        onclick="selectType('sima','Sima találkozó',this)">
+
+                    <span class="type-icon">🤝</span>
+                    Sima találkozó
+
+                </button>
+
+                <button class="type-btn"
+                        onclick="selectType('randi','Randi',this)">
+
+                    <span class="type-icon">💖</span>
+                    Randi
+
+                </button>
+
+                <button class="type-btn"
+                        onclick="selectType('kondi','Kondi',this)">
+
+                    <span class="type-icon">🏋️</span>
+                    Kondi
+
+                </button>
+
+                <button class="type-btn"
+                        onclick="selectType('kajalas','Kajálás',this)">
+
+                    <span class="type-icon">🍔</span>
+                    Kajálás
+
+                </button>
+
+                <button class="type-btn"
+                        onclick="selectType('egyeb','Egyéb',this)">
+
+                    <span class="type-icon">✨</span>
+                    Egyéb
+
+                </button>
+
+                <hr style="border:0;border-top:1px solid rgba(180,40,110,.12);margin:20px 0;">
+
+                <button class="type-btn"
+                        onclick="showSearch()">
+
+                    <span class="type-icon">🔍</span>
+                    Foglalás keresése
+
+                </button>
+
+            </aside>
+
+
+            <div class="booking-main">
+
+                <div id="bookingEmpty"
+                     class="empty-state">
+
+                    <div>
+
+                        <div class="big-icon">
+                            🐰
+                        </div>
+
+                        <h3>
+                            Válassz egy programot!
+                        </h3>
+
+                        <p>
+                            Bal oldalon válaszd ki,
+                            milyen találkozót szeretnél.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div id="bookingForm"
+                     class="hidden">
+
+                    <h3 id="bookingTitle"
+                        style="font-size:1.8rem;margin-bottom:22px;">
+                        Időpontfoglalás
+                    </h3>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                👤 A te neved
+                            </label>
+
+                            <input type="text"
+                                   id="bookerName"
+                                   placeholder="Írd be a neved...">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                🎂 Hány éves vagy?
+                            </label>
+
+                            <input type="number"
+                                   id="bookerAge"
+                                   placeholder="pl. 18">
+
+                        </div>
+
+
+                        <div id="dynamicFields"
+                             class="form-group full">
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label>
+                                📅 Válassz egy napot
+                            </label>
+
+                            <input type="date"
+                                   id="bookingDate"
+                                   onchange="handleDateChange()">
+
+                        </div>
+
+                    </div>
+
+
+                    <div id="timeSelector"
+                         class="time-box hidden">
+
+                        <div id="bookedSlots"
+                             class="booked-slots hidden">
+                        </div>
+
+
+                        <div class="slider-group">
+
+                            <div class="slider-title">
+
+                                <span>
+                                    🕐 Kezdés
+                                </span>
+
+                                <span id="startDisplay">
+                                    08:00
+                                </span>
+
+                            </div>
+
+                            <input type="range"
+                                   id="startSlider"
+                                   min="0"
+                                   max="1425"
+                                   step="15"
+                                   value="480"
+                                   oninput="updateSliders('start')">
+
+                        </div>
+
+
+                        <div class="slider-group">
+
+                            <div class="slider-title">
+
+                                <span>
+                                    🕐 Befejezés
+                                </span>
+
+                                <span id="endDisplay">
+                                    09:00
+                                </span>
+
+                            </div>
+
+                            <input type="range"
+                                   id="endSlider"
+                                   min="15"
+                                   max="1440"
+                                   step="15"
+                                   value="540"
+                                   oninput="updateSliders('end')">
+
+                        </div>
+
+
+                        <div id="statusMessage"
+                             class="status free">
+                            Válassz időpontot 💗
+                        </div>
+
+                    </div>
+
+
+                    <button id="submitBtn"
+                            class="primary"
+                            style="width:100%;margin-top:20px;"
+                            onclick="saveBooking()"
+                            disabled>
+
+                        💗 Foglalás véglegesítése
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     KERESÉS
+===================================================== -->
+
+<main id="searchPage" class="page hidden">
+
+    <section class="card section">
+
+        <div class="sub-header">
+
+            <div>
+
+                <button class="back"
+                        onclick="openBooking()">
+                    ← Vissza
+                </button>
+
+                <h2>Foglalások 🔍</h2>
+
+                <p>
+                    A foglalások megtekintéséhez szükség van
+                    a Fédra-kódra.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="search-box">
+
+            <div class="form-group">
+
+                <label>
+                    🔐 Fédra kódja
+                </label>
+
+                <input type="password"
+                       id="secretCode"
+                       placeholder="Add meg a belépési kódot..."
+                       oninput="searchBookings()">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    👤 Keresés név alapján
+                </label>
+
+                <input type="text"
+                       id="searchName"
+                       placeholder="Írd be a nevet..."
+                       oninput="searchBookings()">
+
+            </div>
+
+
+            <div id="results"></div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     EDZÉS
+===================================================== -->
+
+<main id="trainingPage" class="page hidden">
+
+    <section class="card section">
+
+        <div class="sub-header">
+
+            <div>
+
+                <button class="back"
+                        onclick="showHome()">
+                    ← Kezdőlap
+                </button>
+
+                <h2>Személyi edzés 🏋️‍♀️</h2>
+
+                <p>
+                    Edzés, életmód és motiváció egy helyen.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="training-grid">
+
+            <article class="training-card">
+
+                <div class="icon">🏋️‍♀️</div>
+
+                <h3>Személyi edzés</h3>
+
+                <p>
+                    Célzott és személyre szabott edzéstervek,
+                    amelyek segítenek elérni a kívánt
+                    testformát és erőnlétet.
+                </p>
+
+            </article>
+
+
+            <article class="training-card">
+
+                <div class="icon">🥗</div>
+
+                <h3>Életmód & Táplálkozás</h3>
+
+                <p>
+                    Gyakorlati tanácsadás az egészséges
+                    és fenntartható életért.
+                </p>
+
+            </article>
+
+
+            <article class="training-card">
+
+                <div class="icon">🤝</div>
+
+                <h3>Egészségmentor</h3>
+
+                <p>
+                    Komplex támogatás testben és lélekben.
+                    Nem csak edzünk, hanem motiváljuk egymást.
+                </p>
+
+            </article>
+
+
+            <article class="training-card">
+
+                <div class="icon">🏆</div>
+
+                <h3>Eredmények</h3>
+
+                <p>
+                    Mérhető fejlődés, folyamatos motiváció
+                    és valódi változás.
+                </p>
+
+            </article>
+
+
+            <article class="training-card">
+
+                <div class="icon">👥</div>
+
+                <h3>Páros edzés</h3>
+
+                <p>
+                    Motiváló közös edzés barátokkal,
+                    párokkal vagy kisebb társaságban.
+                </p>
+
+            </article>
+
+
+            <article class="training-card">
+
+                <div class="icon">🔥</div>
+
+                <h3>Motiváció</h3>
+
+                <p>
+                    Lépésről lépésre haladunk,
+                    hogy ne csak elkezdd, hanem végig is csináld.
+                </p>
+
+            </article>
+
+        </div>
+
+
+        <div class="contact-banner">
+
+            <strong>
+                Kezdd el ma a változást! ✨
+            </strong>
+
+            <p>
+                Kérj ajánlatot vagy jelentkezz be
+                egy ingyenes próbaedzésre.
+            </p>
+
+            <br>
+
+            📞 +36 30 123 4567
+            &nbsp; · &nbsp;
+            🌐 facebook.com/krista.fedra
+            &nbsp; · &nbsp;
+            💻 www.kristafedra.hu
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     GALÉRIA LOGIN
+===================================================== -->
+
+<main id="loginPage" class="page hidden">
+
+    <section class="card section"
+             style="max-width:650px;margin:auto;text-align:center;">
+
+        <div style="font-size:70px;margin-bottom:15px;">
+            🔐
+        </div>
+
+        <h2 style="font-family:'Playfair Display',serif;
+                   font-size:2.7rem;
+                   color:#68163f;
+                   margin-bottom:12px;">
+            Privát galéria
+        </h2>
+
+        <p style="line-height:1.7;margin-bottom:25px;">
+            Ez a rész csak a megfelelő jelszóval
+            érhető el. 💗
+        </p>
+
+        <div class="form-group"
+             style="text-align:left;">
+
+            <label>
+                🔑 Jelszó
+            </label>
+
+            <input type="password"
+                   id="loginCode"
+                   placeholder="Írd be a jelszót..."
+                   onkeydown="if(event.key==='Enter')validateLogin()">
+
+        </div>
+
+        <button class="primary"
+                style="width:100%;"
+                onclick="validateLogin()">
+
+            💗 Belépés
+
+        </button>
+
+        <div id="loginError"
+             class="error hidden">
+
+            ❌ Helytelen jelszó!
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     GALÉRIA
+===================================================== -->
+
+<main id="galleryPage" class="page hidden">
+
+    <section class="card section">
+
+        <div class="sub-header">
+
+            <div>
+
+                <button class="back"
+                        onclick="showHome()">
+                    ← Kezdőlap
+                </button>
+
+                <h2>Fédra galériája 📸</h2>
+
+                <p>
+                    Pillanatok, edzések és emlékek. 💗
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="gallery-grid"
+             id="galleryGrid">
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     VERSEK
+===================================================== -->
+
+<main id="poemPage" class="page hidden">
+
+    <section class="card section">
+
+        <div class="sub-header">
+
+            <div>
+
+                <button class="back"
+                        onclick="showHome()">
+                    ← Kezdőlap
+                </button>
+
+                <h2>Versek Fédrának 💕</h2>
+
+                <p>
+                    Egy kis gyűjtemény azokból a gondolatokból,
+                    amelyeket Fédra ihletett.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="poems">
+
+
+            <article class="poem">
+
+                <div class="poem-date">
+                    Augusztus 15.
+                </div>
+
+                <h3>TÓPART</h3>
+
+                <div class="poem-text">
 A tóparton ketten
 Némán, szép csendben
 Természet lágy ölén
@@ -434,14 +2079,20 @@ Elhalkul minden más
 Oly lágy a suttogás
 Itt vagyunk TE és ÉN
 A tópart peremén
-        </div>
+                </div>
 
-        <hr class="poem-divider">
+            </article>
 
-        <!-- SZEPTEMBER 1. VERS -->
-        <div class="poem-date">Szeptember 1.</div>
-        <h2>TE</h2>
-        <div class="poem-text">
+
+            <article class="poem">
+
+                <div class="poem-date">
+                    Szeptember 1.
+                </div>
+
+                <h3>TE</h3>
+
+                <div class="poem-text">
 Nem vagyok én jó ember, tudom jól de veled minden megváltozott.
 Mikor gyönyörű kék szemedbe néztem, szomorúságom eltávozott.
 Nem gondoltam volna, hogy engem újra egy lány ennyire elkápráztat.
@@ -454,12 +2105,21 @@ Valamit érzek, valami kimondatlan de mégis csodás érzést.
 Hiszen TE állítottad el a tátongó sebeimből folyó vérzést.
 Szerelmes lettem a tekintetedbe, a mosolyodba, illatodba.
 Miattad érzem magamat újra, fent, magasan a csillagokban.
-        </div>
+                </div>
 
-        <div class="poem-date">Szeptember 6.</div>
-        <h2>KÖTELÉK</h2>
-        <div class="poem-text">
-            Láthatatlan erős érzés ami kettőnk között kialakult,
+            </article>
+
+
+            <article class="poem">
+
+                <div class="poem-date">
+                    Szeptember 6.
+                </div>
+
+                <h3>KÖTELÉK</h3>
+
+                <div class="poem-text">
+Láthatatlan erős érzés ami kettőnk között kialakult,
 Mert egymásnak közelségében a tiszta lelkünk felszabadult.
 Együtt lenni olyan, mint egy mély, őszinte szerelmi történet,
 Én nem szeretném elveszíteni az együtt töltött estéket.
@@ -473,12 +2133,21 @@ Szeretném, ha te boldog lennél, és az teljesen mindegy, hogy hogyan,
 Vagy velem, vagy nélkülem, ezt csak te tudhatod a legjobban.
 Úgy betörtél a szívembe, mint egy igazán erős lövedék,
 Hisz ez, ami köztünk van, az egy láthatatlan, szoros kötelék.
-        </div>
+                </div>
 
-        <div class="poem-date">Szeptember 12.</div>
-        <h2>SZERETNÉLEK...</h2>
-        <div class="poem-text">
-                Szeretnélek elengedni,
+            </article>
+
+
+            <article class="poem">
+
+                <div class="poem-date">
+                    Szeptember 12.
+                </div>
+
+                <h3>SZERETNÉLEK...</h3>
+
+                <div class="poem-text">
+Szeretnélek elengedni,
 de nem vagyok rá képes,
 Szeretnélek elfeledni,
 de az életem veled fényes.
@@ -507,442 +2176,1004 @@ Szeretlek, akármit is tettél,
 de ezt úgy félek kimondani,
 Becsaptál, és mélyen átvertél,
 mégsem tudok rólad lemondani.
-        </div>
-
-        <div class="signature">Szeretettel Bendzsámin ✨</div>
-    </div>
-
-    <div id="page-booking-section" class="container hidden">
-        <button class="btn-back" onclick="showMainMenu()">⬅ Vissza a Főmenübe</button>
-        
-        <div id="page-selection" class="container">
-            <h2>Foglalj időpontot Fédrához!</h2>
-            <p>Milyen találkozót szeretnél?</p>
-            
-            <button class="btn" onclick="selectType('sima', 'Sima találkozó')">Sima találkozó 🤝</button>
-            <button class="btn" style="background-color: #ff66b2;" onclick="selectType('randi', 'Randi')">Randi 💖</button>
-            <button class="btn" style="background-color: #ff4500;" onclick="selectType('kondi', 'Kondi')">Kondi 🏋️‍♂️</button>
-            <button class="btn" style="background-color: #ff8c00;" onclick="selectType('kajalas', 'Kajálás')">Kajálás 🍔</button>
-            <button class="btn" style="background-color: #9933ff;" onclick="selectType('egyeb', 'Egyéb')">Egyéb ✨</button>
-
-            <hr style="margin: 25px 0; border: 0; border-top: 1px solid #ddd;">
-            <button class="btn btn-secondary" onclick="showSubPage('page-search')">Már foglaltam / Keresés 🔍</button>
-        </div>
-
-        <div id="page-booking" class="container hidden">
-            <button class="btn-back" onclick="resetApp()">⬅ Vissza a típusokhoz</button>
-            <h2 id="booking-title">Időpontfoglalás</h2>
-            
-            <div class="form-group">
-                <label for="bookerName">A te neved:</label>
-                <input type="text" id="bookerName" placeholder="Írd be a neved..." required>
-            </div>
-
-            <div class="form-group">
-                <label for="bookerAge">Hány éves vagy?</label>
-                <input type="number" id="bookerAge" placeholder="pl. 18" required>
-            </div>
-
-            <div id="dynamic-fields"></div>
-
-            <div class="form-group">
-                <label for="bookingDate">Válassz egy napot:</label>
-                <input type="date" id="bookingDate" onchange="handleDateChange()" required>
-            </div>
-            
-            <div id="time-selector" class="slider-container hidden">
-                <div id="booked-slots-display" class="booked-slots-list hidden"></div>
-
-                <div class="slider-group">
-                    <label>Kezdés ideje: <span id="startDisplay">08:00</span></label>
-                    <input type="range" id="startSlider" min="0" max="1425" step="15" value="480" oninput="updateSliders('start')">
                 </div>
 
-                <div class="slider-group">
-                    <label>Befejezés ideje: <span id="endDisplay">09:00</span></label>
-                    <input type="range" id="endSlider" min="15" max="1440" step="15" value="540" oninput="updateSliders('end')">
+                <div class="poem-sign">
+                    Szeretettel Bendzsámin ✨
                 </div>
 
-                <div id="status-message" class="status-free">Szabad időpont! ✅</div>
-            </div>
+            </article>
 
-            <button class="btn" id="submitBtn" style="margin-top: 20px;" onclick="saveBooking()" disabled>Foglalás véglegesítése</button>
+
         </div>
 
-        <div id="page-search" class="container hidden">
-            <button class="btn-back" onclick="resetApp()">⬅ Vissza a típusokhoz</button>
-            <h2>Foglalások keresése</h2>
+    </section>
 
-            <div class="form-group">
-                <label for="secretCode">Fédra kódja:</label>
-                <input type="password" id="secretCode" placeholder="Add meg a belépési kódot..." oninput="searchBookings()">
-            </div>
-            
-            <div class="form-group">
-                <label for="searchName">Keresés név alapján:</label>
-                <input type="text" id="searchName" placeholder="Írd be a nevet..." oninput="searchBookings()">
-            </div>
-            
-            <div id="results"></div>
-        </div>
-    </div>
+</main>
 
-    <div id="page-training" class="container hidden">
-        <button class="btn-back" style="color: var(--accent-gold);" onclick="showMainMenu()">⬅ Vissza a Főmenübe</button>
-        <h2>Személyi Edzés Fédrával</h2>
 
-        <div class="details-grid">
-            <div class="detail-item">
-                <h3>🏋️‍♀️ Személyi edzés</h3>
-                <p>Célzott, hatékony, személyre szabott edzéstervek, amelyek segítenek elérni a kívánt testformát és erőnlétet.</p>
-            </div>
-            <div class="detail-item">
-                <h3>🥗 Életmód & Táplálkozás</h3>
-                <p>Gyakorlati tanácsadás az egészséges és fenntartható életért. Segítek kialakítani egy olyan életmódot, amely illeszkedik a céljaidhoz.</p>
-            </div>
-            <div class="detail-item">
-                <h3>🤝 Egészségmentor program</h3>
-                <p>Komplex támogatás, testben és lélekben egyaránt. Nem csak edzünk, de motiválom és támogatom az egész utat.</p>
-            </div>
-            <div class="detail-item">
-                <h3>🏆 Eredmények</h3>
-                <p>Mérhető fejlődés, folyamatos motiváció, valódi változás. Az edzések eredményeit rendszeresen nyomon követjük.</p>
-            </div>
-            <div class="detail-item">
-                <h3>👥 Páros és kiscsoportos edzések</h3>
-                <p>Motivált közös edzések barátokkal, párokkal. Ha szereted a társaságot, ez a tökéletes választás.</p>
-            </div>
-        </div>
+<footer class="footer">
+    Fédra World · 💗 🐰 ✨
+</footer>
 
-        <div class="training-footer">
-            <p class="training-call">Kezdd el ma a változást! ✨</p>
-            <p>Kérj ajánlatot vagy jelentkezz be egy ingyenes próbaedzésre és állapotfelmérésre az elérhetőségeimen:</p>
-            <p>📞 +36 30 123 4567 | 🌐 facebook.com/krista.fedra | 💻 www.kristafedra.hu</p>
-        </div>
-    </div>
 
-    <div id="page-gallery" class="container hidden">
-        <button class="btn-back" onclick="showMainMenu()">⬅ Vissza a Főmenübe</button>
-        <h2>Képek Fédráról</h2>
-        <p>Itt láthattok majd képeket rólam, a kondizásról és a barátnőimmel töltött időről!</p>
+<script>
 
-        <div class="gallery-grid">
-        </div>
-    </div>
+/* =========================================================
+   ADATOK
+========================================================= */
 
-    <script>
-        let currentType = '';
-        let currentTypeLabel = '';
-        let selectedDate = '';
-        let isIntervalValid = false;
+let currentType = "";
+let currentTypeLabel = "";
+let selectedDate = "";
+let isIntervalValid = false;
 
-        // V4-es adatbázis (megmaradnak a korábban mentett adataid)
-        let bookings = JSON.parse(localStorage.getItem('fedra_bookings_v4')) || [];
+let bookings =
+    JSON.parse(localStorage.getItem("fedra_bookings_v4")) || [];
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const today = new Date().toISOString().split("T")[0];
-            const dateInput = document.getElementById('bookingDate');
-            if (dateInput) dateInput.min = today;
+
+/* =========================================================
+   OLDALKEZELÉS
+========================================================= */
+
+const pages = [
+    "homePage",
+    "bookingPage",
+    "searchPage",
+    "trainingPage",
+    "loginPage",
+    "galleryPage",
+    "poemPage"
+];
+
+function hidePages(){
+
+    pages.forEach(id => {
+
+        document
+            .getElementById(id)
+            .classList
+            .add("hidden");
+
+    });
+
+}
+
+function showPage(id){
+
+    hidePages();
+
+    document
+        .getElementById(id)
+        .classList
+        .remove("hidden");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+function showHome(){
+    showPage("homePage");
+}
+
+function openBooking(){
+
+    showPage("bookingPage");
+
+    document
+        .getElementById("bookingEmpty")
+        .classList
+        .remove("hidden");
+
+    document
+        .getElementById("bookingForm")
+        .classList
+        .add("hidden");
+
+}
+
+function openTraining(){
+    showPage("trainingPage");
+}
+
+function openGallery(){
+
+    showPage("loginPage");
+
+    document
+        .getElementById("loginCode")
+        .value = "";
+
+    document
+        .getElementById("loginError")
+        .classList
+        .add("hidden");
+}
+
+function showSearch(){
+    showPage("searchPage");
+}
+
+function showPoemPage(){
+    showPage("poemPage");
+}
+
+
+/* =========================================================
+   BEMUTATKOZÓ
+========================================================= */
+
+function closeIntro(){
+
+    document
+        .getElementById("introModal")
+        .classList
+        .add("hidden");
+
+}
+
+
+/* =========================================================
+   DÁTUM
+========================================================= */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    const today =
+        new Date()
+        .toISOString()
+        .split("T")[0];
+
+    document
+        .getElementById("bookingDate")
+        .min = today;
+
+});
+
+
+/* =========================================================
+   TÍPUSVÁLASZTÁS
+========================================================= */
+
+function selectType(type,label,button){
+
+    currentType = type;
+    currentTypeLabel = label;
+
+    document
+        .querySelectorAll(".type-btn")
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+    if(button){
+        button.classList.add("active");
+    }
+
+    document
+        .getElementById("bookingEmpty")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("bookingForm")
+        .classList
+        .remove("hidden");
+
+    document
+        .getElementById("bookingTitle")
+        .innerText =
+            label + " foglalása";
+
+    const container =
+        document.getElementById("dynamicFields");
+
+
+    if(type === "kajalas"){
+
+        container.innerHTML = `
+
+            <label>
+                🍔 Hol szeretnénk enni?
+            </label>
+
+            <select id="foodSelect"
+                    onchange="toggleCustomFood()">
+
+                <option value="McDonald's">
+                    McDonald's
+                </option>
+
+                <option value="Burger King">
+                    Burger King
+                </option>
+
+                <option value="KFC">
+                    KFC
+                </option>
+
+                <option value="Pizza Hut">
+                    Pizza Hut
+                </option>
+
+                <option value="Bellozzo">
+                    Bellozzo
+                </option>
+
+                <option value="custom">
+                    Egyéb
+                </option>
+
+            </select>
+
+            <input type="text"
+                   id="customDetailInput"
+                   class="hidden"
+                   style="margin-top:10px;"
+                   placeholder="Írd be a helyszínt...">
+
+        `;
+
+    }
+
+    else if(type === "kondi"){
+
+        container.innerHTML = `
+
+            <label>
+                🏋️ Milyen edzést csinálnál?
+            </label>
+
+            <select id="detailInput">
+
+                <option value="Kardió">Kardió</option>
+                <option value="Láb">Láb</option>
+                <option value="Hát">Hát</option>
+                <option value="Mell">Mell</option>
+                <option value="Bicepsz">Bicepsz</option>
+                <option value="Tricepsz">Tricepsz</option>
+
+            </select>
+
+        `;
+
+    }
+
+    else if(type === "randi"){
+
+        container.innerHTML = `
+
+            <label>
+                💗 Randi helyszíne
+            </label>
+
+            <input type="text"
+                   id="detailInput"
+                   placeholder="Írd be a helyszínt...">
+
+        `;
+
+    }
+
+    else if(type === "egyeb"){
+
+        container.innerHTML = `
+
+            <label>
+                ✨ Miről szeretnél témázni?
+            </label>
+
+            <input type="text"
+                   id="detailInput"
+                   placeholder="Pl. Élet értelme...">
+
+        `;
+
+    }
+
+    else{
+
+        container.innerHTML = `
+
+            <label>
+                🤝 Mit szeretnél csinálni?
+            </label>
+
+            <input type="text"
+                   id="detailInput"
+                   placeholder="Írd le röviden...">
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   KAJÁLÁS
+========================================================= */
+
+function toggleCustomFood(){
+
+    const select =
+        document.getElementById("foodSelect");
+
+    const input =
+        document.getElementById("customDetailInput");
+
+    if(select.value === "custom"){
+
+        input.classList.remove("hidden");
+
+    }
+    else{
+
+        input.classList.add("hidden");
+        input.value = "";
+
+    }
+
+}
+
+
+/* =========================================================
+   DÁTUMVÁLASZTÁS
+========================================================= */
+
+function handleDateChange(){
+
+    selectedDate =
+        document
+        .getElementById("bookingDate")
+        .value;
+
+    if(!selectedDate)
+        return;
+
+    document
+        .getElementById("timeSelector")
+        .classList
+        .remove("hidden");
+
+    showBookedSlotsForDate();
+
+    updateSliders("start");
+
+}
+
+
+/* =========================================================
+   IDŐ
+========================================================= */
+
+function formatTime(minutes){
+
+    const h =
+        Math.floor(minutes / 60);
+
+    const m =
+        minutes % 60;
+
+    return (
+        (h < 10 ? "0" : "") + h +
+        ":" +
+        (m < 10 ? "0" : "") + m
+    );
+
+}
+
+
+function updateSliders(changed){
+
+    let start =
+        parseInt(
+            document
+            .getElementById("startSlider")
+            .value
+        );
+
+    let end =
+        parseInt(
+            document
+            .getElementById("endSlider")
+            .value
+        );
+
+
+    if(start >= end){
+
+        if(changed === "start"){
+
+            end = start + 15;
+
+            if(end > 1440)
+                end = 1440;
+
+            document
+                .getElementById("endSlider")
+                .value = end;
+
+        }
+        else{
+
+            start = end - 15;
+
+            if(start < 0)
+                start = 0;
+
+            document
+                .getElementById("startSlider")
+                .value = start;
+
+        }
+
+    }
+
+
+    document
+        .getElementById("startDisplay")
+        .innerText =
+            formatTime(start);
+
+    document
+        .getElementById("endDisplay")
+        .innerText =
+            formatTime(end);
+
+
+    checkAvailability(start,end);
+
+}
+
+
+/* =========================================================
+   FOGLALT IDŐPONTOK
+========================================================= */
+
+function showBookedSlotsForDate(){
+
+    const display =
+        document.getElementById("bookedSlots");
+
+    const todaysBookings =
+        bookings.filter(
+            b => b.date === selectedDate
+        );
+
+
+    if(todaysBookings.length === 0){
+
+        display.classList.add("hidden");
+        display.innerHTML = "";
+
+        return;
+
+    }
+
+
+    display.classList.remove("hidden");
+
+    todaysBookings.sort(
+        (a,b) =>
+            a.startMins - b.startMins
+    );
+
+
+    let html =
+        "<strong>💗 Ezen a napon már foglalt:</strong><br>";
+
+    todaysBookings.forEach(b => {
+
+        html +=
+            `• ${formatTime(b.startMins)}
+             – ${formatTime(b.endMins)}<br>`;
+
+    });
+
+
+    display.innerHTML = html;
+
+}
+
+
+/* =========================================================
+   SZABAD IDŐPONT
+========================================================= */
+
+function checkAvailability(start,end){
+
+    const todaysBookings =
+        bookings.filter(
+            b => b.date === selectedDate
+        );
+
+
+    const conflict =
+        todaysBookings.some(b => {
+
+            return (
+                start < b.endMins &&
+                end > b.startMins
+            );
+
         });
 
-        // --- FŐMENÜ ÉS SZEKCIÓ KEZELÉS ---
-        function hideAllSections() {
-            document.getElementById('page-main-menu').classList.add('hidden');
-            document.getElementById('page-booking-section').classList.add('hidden');
-            document.getElementById('page-training').classList.add('hidden');
-            document.getElementById('page-gallery').classList.add('hidden');
-            document.getElementById('page-login').classList.add('hidden');
-            document.getElementById('page-poem').classList.add('hidden'); 
-            document.getElementById('intro-popup').classList.add('hidden');
+
+    const status =
+        document.getElementById("statusMessage");
+
+    const submit =
+        document.getElementById("submitBtn");
+
+
+    if(conflict){
+
+        status.className =
+            "status booked";
+
+        status.innerText =
+            "❌ Ez az időpont már foglalt!";
+
+        submit.disabled = true;
+
+        isIntervalValid = false;
+
+    }
+    else{
+
+        status.className =
+            "status free";
+
+        status.innerText =
+            "✅ Szabad időpont!";
+
+        submit.disabled = false;
+
+        isIntervalValid = true;
+
+    }
+
+}
+
+
+/* =========================================================
+   FOGLALÁS MENTÉSE
+========================================================= */
+
+function saveBooking(){
+
+    if(!isIntervalValid)
+        return;
+
+
+    const name =
+        document
+        .getElementById("bookerName")
+        .value
+        .trim();
+
+    const age =
+        document
+        .getElementById("bookerAge")
+        .value
+        .trim();
+
+
+    let detail = "";
+
+
+    if(currentType === "kajalas"){
+
+        const select =
+            document
+            .getElementById("foodSelect");
+
+        if(select.value === "custom"){
+
+            detail =
+                document
+                .getElementById("customDetailInput")
+                .value
+                .trim();
+
+        }
+        else{
+
+            detail = select.value;
+
         }
 
-        // Amikor a pop-upból kilépünk, a főmenübe kerülünk
-        function closeIntro() {
-            hideAllSections();
-            document.getElementById('page-main-menu').classList.remove('hidden');
-            document.getElementById('body').className = 'theme-sima';
+    }
+    else{
+
+        const input =
+            document
+            .getElementById("detailInput");
+
+        detail =
+            input.value.trim();
+
+    }
+
+
+    if(!name || !age || !detail || !selectedDate){
+
+        alert("💗 Kérlek tölts ki minden mezőt!");
+
+        return;
+
+    }
+
+
+    const startMins =
+        parseInt(
+            document
+            .getElementById("startSlider")
+            .value
+        );
+
+    const endMins =
+        parseInt(
+            document
+            .getElementById("endSlider")
+            .value
+        );
+
+
+    let detailLabel = "Téma:";
+
+    if(currentType === "kajalas")
+        detailLabel = "Helyszín:";
+
+    if(currentType === "kondi")
+        detailLabel = "Edzés:";
+
+    if(currentType === "randi")
+        detailLabel = "Helyszín:";
+
+
+    const booking = {
+
+        name:name,
+        age:age,
+        type:currentTypeLabel,
+        detailLabel:detailLabel,
+        detail:detail,
+        date:selectedDate,
+        startMins:startMins,
+        endMins:endMins
+
+    };
+
+
+    bookings.push(booking);
+
+
+    localStorage.setItem(
+        "fedra_bookings_v4",
+        JSON.stringify(bookings)
+    );
+
+
+    alert(
+        "💗 Sikeres foglalás!\n\n" +
+        selectedDate +
+        "\n" +
+        formatTime(startMins) +
+        " – " +
+        formatTime(endMins)
+    );
+
+
+    resetBooking();
+
+}
+
+
+/* =========================================================
+   FOGLALÁS RESET
+========================================================= */
+
+function resetBooking(){
+
+    document
+        .getElementById("bookerName")
+        .value = "";
+
+    document
+        .getElementById("bookerAge")
+        .value = "";
+
+    document
+        .getElementById("bookingDate")
+        .value = "";
+
+    document
+        .getElementById("timeSelector")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("bookingForm")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("bookingEmpty")
+        .classList
+        .remove("hidden");
+
+    document
+        .querySelectorAll(".type-btn")
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+    selectedDate = "";
+    currentType = "";
+    isIntervalValid = false;
+
+}
+
+
+/* =========================================================
+   KERESÉS
+========================================================= */
+
+function searchBookings(){
+
+    const code =
+        document
+        .getElementById("secretCode")
+        .value;
+
+    const term =
+        document
+        .getElementById("searchName")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const results =
+        document.getElementById("results");
+
+
+    results.innerHTML = "";
+
+
+    if(code !== "20092003"){
+
+        if(code.length > 0){
+
+            results.innerHTML =
+                `<div class="error">
+                    ❌ Helytelen kód!
+                 </div>`;
+
         }
 
-        // KÜLÖN FUNKCIÓ A VERS OLDAL MEGJELENÍTÉSÉHEZ
-        function showPoemPage() {
-            hideAllSections();
-            document.getElementById('page-poem').classList.remove('hidden');
-            document.getElementById('body').className = 'theme-randi'; 
-        }
+        return;
 
-        function showMainMenu() {
-            hideAllSections();
-            document.getElementById('page-main-menu').classList.remove('hidden');
-            document.getElementById('body').className = 'theme-sima';
-            document.getElementById('loginCode').value = ''; // jelszó mező ürítése
-            document.getElementById('loginError').classList.add('hidden');
-        }
+    }
 
-        // --- FRISSÍTETT MENÜ KEZELŐ ---
-        function handleMenuClick(action) {
-            if (action === 'booking') {
-                hideAllSections();
-                document.getElementById('page-booking-section').classList.remove('hidden');
-                showSubPage('page-selection');
-            } else if (action === 'training') {
-                hideAllSections();
-                document.getElementById('page-training').classList.remove('hidden');
-            } else if (action === 'gallery') {
-                hideAllSections();
-                document.getElementById('page-login').classList.remove('hidden');
-            } else if (action === 'poem') { 
-                showPoemPage();
-            }
-        }
 
-        function validateLogin() {
-            const code = document.getElementById('loginCode').value;
-            const errorEl = document.getElementById('loginError');
-            if (code === '20092003') {
-                errorEl.classList.add('hidden');
-                hideAllSections();
-                document.getElementById('page-gallery').classList.remove('hidden');
-            } else {
-                errorEl.classList.remove('hidden');
-            }
-        }
+    let filtered = bookings;
 
-        // A foglaláson belüli aloldalak kezelése
-        function showSubPage(pageId) {
-            document.getElementById('page-selection').classList.add('hidden');
-            document.getElementById('page-booking').classList.add('hidden');
-            document.getElementById('page-search').classList.add('hidden');
-            document.getElementById(pageId).classList.remove('hidden');
-        }
 
-        // --- FOGLALÁSI LOGIKA ---
-        function selectType(type, label) {
-            currentType = type;
-            currentTypeLabel = label;
-            document.getElementById('body').className = 'theme-' + type;
-            document.getElementById('booking-title').innerText = label + ' foglalása';
-            
-            const dynamicContainer = document.getElementById('dynamic-fields');
-            if (type === 'kajalas') {
-                dynamicContainer.innerHTML = `
-                    <div class="form-group">
-                        <label for="foodSelect">Hol szeretnénk enni?</label>
-                        <select id="foodSelect" onchange="toggleCustomFood()">
-                            <option value="McDonald's">McDonald's</option>
-                            <option value="Burger King">Burger King</option>
-                            <option value="KFC">KFC</option>
-                            <option value="Pizza Hut">Pizza Hut</option>
-                            <option value="Bellozzo">Bellozzo</option>
-                            <option value="custom">Egyéb (saját választás...)</option>
-                        </select>
-                        <input type="text" id="customDetailInput" class="hidden" placeholder="Írd be, hol ennél..." style="margin-top: 10px;">
-                    </div>`;
-            } else if (type === 'kondi') {
-                dynamicContainer.innerHTML = `
-                    <div class="form-group">
-                        <label for="detailInput">Milyen edzést csinálnál?</label>
-                        <select id="detailInput">
-                            <option value="Kardió">Kardió</option>
-                            <option value="Láb">Láb</option>
-                            <option value="Hát">Hát</option>
-                            <option value="Mell">Mell</option>
-                            <option value="Bicepsz">Bicepsz</option>
-                            <option value="Tricepsz">Tricepsz</option>
-                        </select>
-                    </div>`;
-            } else if (type === 'randi') {
-                dynamicContainer.innerHTML = `<div class="form-group"><label for="detailInput">Randi helyszíne:</label><input type="text" id="detailInput" placeholder="Írd be a helyszínt..." required></div>`;
-            } else {
-                dynamicContainer.innerHTML = `<div class="form-group"><label for="detailInput">Miről szeretnél témázni?</label><input type="text" id="detailInput" placeholder="Pl.: Élet értelme..." required></div>`;
-            }
-            showSubPage('page-booking');
-        }
+    if(term){
 
-        function toggleCustomFood() {
-            const select = document.getElementById('foodSelect');
-            const customInput = document.getElementById('customDetailInput');
-            if (select.value === 'custom') {
-                customInput.classList.remove('hidden');
-            } else {
-                customInput.classList.add('hidden');
-                customInput.value = '';
-            }
-        }
+        filtered =
+            bookings.filter(
+                b =>
+                    b.name
+                    .toLowerCase()
+                    .includes(term)
+            );
 
-        function formatTime(minutes) {
-            let h = Math.floor(minutes / 60);
-            let m = minutes % 60;
-            return (h < 10 ? '0' + h : h) + ':' + (m < 10 ? '0' + m : m);
-        }
+    }
 
-        function handleDateChange() {
-            selectedDate = document.getElementById('bookingDate').value;
-            if(selectedDate) {
-                document.getElementById('time-selector').classList.remove('hidden');
-                document.getElementById('submitBtn').disabled = false;
-                showBookedSlotsForDate();
-                updateSliders('start');
-            }
-        }
 
-        function showBookedSlotsForDate() {
-            const display = document.getElementById('booked-slots-display');
-            const todaysBookings = bookings.filter(b => b.date === selectedDate);
-            
-            if(todaysBookings.length === 0) {
-                display.classList.add('hidden');
-            } else {
-                display.classList.remove('hidden');
-                let text = '<strong>Ezen a napon már foglalt:</strong><br>';
-                todaysBookings.sort((a,b) => a.startMins - b.startMins);
-                todaysBookings.forEach(b => {
-                    text += `- ${formatTime(b.startMins)} és ${formatTime(b.endMins)} között<br>`;
-                });
-                display.innerHTML = text;
-            }
-        }
+    if(filtered.length === 0){
 
-        function updateSliders(changed) {
-            let startVal = parseInt(document.getElementById('startSlider').value);
-            let endVal = parseInt(document.getElementById('endSlider').value);
+        results.innerHTML = `
+            <div class="search-result"
+                 style="text-align:center;">
+                💗 Nincs találat.
+            </div>
+        `;
 
-            if (startVal >= endVal) {
-                if (changed === 'start') {
-                    endVal = startVal + 15;
-                    document.getElementById('endSlider').value = endVal;
-                } else {
-                    startVal = endVal - 15;
-                    document.getElementById('startSlider').value = startVal;
-                }
-            }
+        return;
 
-            document.getElementById('startDisplay').innerText = formatTime(startVal);
-            document.getElementById('endDisplay').innerText = formatTime(endVal);
-            checkAvailability(startVal, endVal);
-        }
+    }
 
-        function checkAvailability(startMins, endMins) {
-            const todaysBookings = bookings.filter(b => b.date === selectedDate);
-            const hasConflict = todaysBookings.some(b => {
-                return (startMins < b.endMins && endMins > b.startMins);
-            });
 
-            const statusEl = document.getElementById('status-message');
-            const submitBtn = document.getElementById('submitBtn');
+    filtered.forEach(b => {
 
-            if (hasConflict) {
-                statusEl.className = 'status-booked';
-                statusEl.innerText = '❌ Ez az idősáv már foglalt (részben vagy egészben)!';
-                submitBtn.disabled = true;
-                isIntervalValid = false;
-            } else {
-                statusEl.className = 'status-free';
-                statusEl.innerText = '✅ Szabad időpont!';
-                submitBtn.disabled = false;
-                isIntervalValid = true;
-            }
-        }
+        results.innerHTML += `
 
-        function saveBooking() {
-            if (!isIntervalValid) return;
+            <div class="search-result">
 
-            const name = document.getElementById('bookerName').value;
-            const age = document.getElementById('bookerAge').value;
-            
-            let detail = '';
-            if (currentType === 'kajalas') {
-                const selectVal = document.getElementById('foodSelect').value;
-                detail = selectVal === 'custom' ? document.getElementById('customDetailInput').value : selectVal;
-            } else {
-                detail = document.getElementById('detailInput').value;
-            }
+                <strong>
+                    👤 ${b.name}
+                </strong>
 
-            if(!name || !age || !detail || !selectedDate) {
-                alert("Kérlek tölts ki minden mezőt!");
-                return;
-            }
+                <span>
+                    (${b.age} éves)
+                </span>
 
-            let startMins = parseInt(document.getElementById('startSlider').value);
-            let endMins = parseInt(document.getElementById('endSlider').value);
+                <br><br>
 
-            let detailLabel = 'Téma:';
-            if (currentType === 'kajalas') detailLabel = 'Helyszín:';
-            if (currentType === 'kondi') detailLabel = 'Edzés:';
-            if (currentType === 'randi') detailLabel = 'Helyszín:';
+                💗 <strong>${b.type}</strong>
 
-            const newBooking = {
-                name: name,
-                age: age,
-                type: currentTypeLabel,
-                detailLabel: detailLabel,
-                detail: detail,
-                date: selectedDate,
-                startMins: startMins,
-                endMins: endMins
-            };
+                <br>
 
-            bookings.push(newBooking);
-            localStorage.setItem('fedra_bookings_v4', JSON.stringify(bookings));
-            
-            alert("Sikeres foglalás!");
-            resetApp();
-        }
+                ${b.detailLabel}
+                ${b.detail}
 
-        // Keresés a foglalások között
-        function searchBookings() {
-            const secretCode = document.getElementById('secretCode').value;
-            const searchTerm = document.getElementById('searchName').value.toLowerCase();
-            const resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = '';
+                <br>
 
-            // Foglalások rejtve maradnak a régi kóddal
-            if (secretCode !== '20092003') {
-                if (secretCode.length > 0) {
-                    resultsDiv.innerHTML = '<p class="error-text">❌ Helytelen kód! A foglalások rejtve vannak.</p>';
-                }
-                return;
-            }
+                📅 ${b.date}
 
-            let filtered = bookings;
-            if (searchTerm.trim() !== '') {
-                filtered = bookings.filter(b => b.name.toLowerCase().includes(searchTerm));
-            }
+                <br>
 
-            if(filtered.length === 0) {
-                resultsDiv.innerHTML = '<p>Nincs megjeleníthető foglalás.</p>';
-                return;
-            }
+                🕐
+                ${formatTime(b.startMins)}
+                –
+                ${formatTime(b.endMins)}
 
-            filtered.forEach(b => {
-                resultsDiv.innerHTML += `
-                    <div class="booking-card">
-                        <strong>Név:</strong> ${b.name} (Életkor: ${b.age})<br>
-                        <strong>Típus:</strong> ${b.type} <br>
-                        <strong>${b.detailLabel}</strong> ${b.detail} <br>
-                        <strong>Dátum:</strong> ${b.date} <br>
-                        <strong>Időpont:</strong> ${formatTime(b.startMins)} - ${formatTime(b.endMins)}
-                    </div>
-                `;
-            });
-        }
+            </div>
 
-        function resetApp() {
-            document.getElementById('body').className = 'theme-sima';
-            
-            if(document.getElementById('bookerName')) document.getElementById('bookerName').value = '';
-            if(document.getElementById('bookerAge')) document.getElementById('bookerAge').value = '';
-            if(document.getElementById('bookingDate')) document.getElementById('bookingDate').value = '';
-            if(document.getElementById('secretCode')) document.getElementById('secretCode').value = '';
-            if(document.getElementById('searchName')) document.getElementById('searchName').value = '';
-            if(document.getElementById('results')) document.getElementById('results').innerHTML = '';
-            
-            if(document.getElementById('time-selector')) document.getElementById('time-selector').classList.add('hidden');
-            if(document.getElementById('submitBtn')) document.getElementById('submitBtn').disabled = true;
-            selectedDate = '';
-            isIntervalValid = false;
-            
-            showSubPage('page-selection');
-        }
-    </script>
+        `;
+
+    });
+
+}
+
+
+/* =========================================================
+   GALÉRIA LOGIN
+========================================================= */
+
+function validateLogin(){
+
+    const code =
+        document
+        .getElementById("loginCode")
+        .value;
+
+    if(code === "20092003"){
+
+        document
+            .getElementById("loginError")
+            .classList
+            .add("hidden");
+
+        showPage("galleryPage");
+
+    }
+    else{
+
+        document
+            .getElementById("loginError")
+            .classList
+            .remove("hidden");
+
+    }
+
+}
+
+
+/* =========================================================
+   GALÉRIA
+========================================================= */
+
+/*
+    A galéria továbbra is üresen indul.
+    Képeket egyszerűen <img> elemekként lehet
+    hozzáadni a galleryGrid elemhez.
+*/
+
+const galleryImages = [
+
+    // "kep1.jpg",
+    // "kep2.jpg",
+    // "kep3.jpg"
+
+];
+
+
+function loadGallery(){
+
+    const grid =
+        document.getElementById("galleryGrid");
+
+    grid.innerHTML = "";
+
+    galleryImages.forEach(src => {
+
+        const img =
+            document.createElement("img");
+
+        img.src = src;
+        img.className = "gallery-item";
+
+        grid.appendChild(img);
+
+    });
+
+}
+
+loadGallery();
+
+
+/* =========================================================
+   ESC - MODAL
+========================================================= */
+
+document.addEventListener("keydown",(event)=>{
+
+    if(event.key === "Escape"){
+
+        document
+            .getElementById("introModal")
+            .classList
+            .add("hidden");
+
+    }
+
+});
+
+
+/* =========================================================
+   PARALLAX / EGÉR EFFEKT
+========================================================= */
+
+document.addEventListener("mousemove",(event)=>{
+
+    const x =
+        (event.clientX / window.innerWidth - .5);
+
+    const y =
+        (event.clientY / window.innerHeight - .5);
+
+
+    document
+        .querySelectorAll(".glow")
+        .forEach((el,index)=>{
+
+            const strength =
+                (index + 1) * 12;
+
+            el.style.transform =
+                `translate(${x * strength}px,
+                           ${y * strength}px)`;
+
+        });
+
+});
+
+
+/* =========================================================
+   KEZDŐ MODAL
+========================================================= */
+
+window.addEventListener("load",()=>{
+
+    setTimeout(()=>{
+
+        document
+            .getElementById("introModal")
+            .classList
+            .remove("hidden");
+
+    },500);
+
+});
+
+</script>
+
 </body>
 </html>
